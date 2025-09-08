@@ -1,4 +1,4 @@
-package t6_objects;
+package t6_objects.arrays;
 
 public class User {
     String name;

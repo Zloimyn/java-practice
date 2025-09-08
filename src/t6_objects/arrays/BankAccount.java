@@ -1,6 +1,4 @@
-package t6_objects;
-
-import t6_objects.arrays.Product;
+package t6_objects.arrays;
 
 public class BankAccount {
     double balance;
