@@ -2,6 +2,11 @@ package t9_encapculations.oop;
 
 public class oop {
     public static void main(String[] args) {
+        //Наследование - это возможность создания класса на основе существующего extends
+        //Дочерний  класс - подкласс
+        //Родительский класс - суперкласс
+
+
         // Создаем объект класса Student
         Student student = new Student("Алексей", 20, 8.5);
 
