@@ -1,4 +1,4 @@
-package twenty_six.Homework;
+package twenty_sixT9.Homework;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package twenty_six.twenti_nain;
+package twenty_sixT9.twenti_nain;
 
 public class Surgeon extends Doctor {
     public Surgeon(String newName, int newAge) {

@@ -1,4 +1,4 @@
-package twenty_six.twenti_nain;
+package twenty_sixT9.twenti_nain;
 
 public class Main {
     public static void main(String[] args) {

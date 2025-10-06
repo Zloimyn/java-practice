@@ -1,14 +1,15 @@
-package twenty_six.twenti_nain;
+package twenty_sixT9.twenti_nain;
 
-public class Waiter extends Human {
+public class Doctor extends Human {
     String profession;
-    public Waiter(String newName, int newAge) {
+    public Doctor(String newName, int newAge) {
         super(newName, newAge);
-        profession = "Официант";
+        profession = "Доктор";
     }
 
     @Override
-    void display() {
+    void display (){
         System.out.println("Меня зовут: "+getName()+" .Мне: "+getAge()+" лет .Моя профессия: "+profession);
     }
+
 }

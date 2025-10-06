@@ -1,4 +1,4 @@
-package twenty_six.New_task.Task2;
+package twenty_sixT9.New_task.Task2;
 
 public class BankAccount {
     private double balance;
