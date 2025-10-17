@@ -4,6 +4,7 @@ import java.util.List;
 public class Forest {
     private List<MountainHare> hares;
     private static String season;
+    static String color;
 
     // объявите недостающие переменные и добавьте конструктор
      static void setSeason(String newSeason){
@@ -16,7 +17,6 @@ public class Forest {
             System.out.println("Шуба "+color);
         }
      }
-
 
     // добавьте метод setSeason(String newSeason)
     // в этом методе реализуйте логику смены цвета шубок зайцев-беляков

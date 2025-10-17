@@ -8,7 +8,7 @@ public class Main {
                 new MountainHare(7, 3.6, 150),
                 new MountainHare(1, 2.3, 100)
         );
-        Forest forest = new Forest(3,4.4,5);
+        Forest forest = new Forest();
 
         System.out.println("В лесу лето!");
         Forest.setSeason("Summer");
