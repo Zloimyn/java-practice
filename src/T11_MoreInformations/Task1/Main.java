@@ -15,14 +15,14 @@ public class Main {
         // создайте объект "летний лес с зайцами"
 
         System.out.println("Список зайцев:");
-        forest.printHares();
+        forest.printHares(hares);
 
         System.out.println("В лесу зима!");
         Forest.setSeason("Winter");
         // поменяйте время года на зиму
 
         System.out.println("Список зайцев:");
-        forest.printHares();
+        forest.printHares(hares);
     }
 }
 

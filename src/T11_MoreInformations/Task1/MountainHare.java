@@ -5,7 +5,15 @@ public class MountainHare {
      int age;
      double weight;
      int jumpLength;
-     String color;
+     static String color;
+
+    public static String getColor() {
+        return color;
+    }
+
+    public static void setColor(String color) {
+        MountainHare.color = color;
+    }
 
     public MountainHare(int age, double weight, int jumpLength) {
         this.age = age;
