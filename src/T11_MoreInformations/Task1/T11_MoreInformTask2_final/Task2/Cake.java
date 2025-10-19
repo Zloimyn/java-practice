@@ -1,4 +1,4 @@
-package T11_MoreInformTask2_final.Task2;
+package T11_MoreInformations.Task1.T11_MoreInformTask2_final.Task2;
 
 public class Cake {
         final private String name;
