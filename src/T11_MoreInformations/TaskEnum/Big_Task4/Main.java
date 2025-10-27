@@ -16,33 +16,28 @@ public class Main {
         printMenu();
 
         String commandValue = scanner.nextLine();
-        while (true) {
             if (ChatCommand.valueOf(commandValue) == ChatCommand.MAP){
                 System.out.println(mapLink);
-                break;
             }
             if (ChatCommand.valueOf(commandValue) == ChatCommand.RECYCLABILITY){
                 System.out.println("Введите код переработки: ");
                 int recyclability = scanner.nextInt();
                 isRecycled(recyclability);
-                break;
             }
             if (ChatCommand.valueOf(commandValue) == ChatCommand.BONUS){
                 int coefficient = 0;
                 System.out.println("Введите количество вторсырья, кг: ");
-                int bonusS = scanner.nextInt();
-                if (bonusS < 10){
-                    coefficient += 10;
+                int weight = scanner.nextInt();
+                if (weight < 10){
+                    coefficient = 10;
                 } else {
-                    coefficient += 15;
+                    coefficient = 15;
                 }
-                int bonus = bonusS * coefficient;
-                coefficient=0;
+                int bonus = weight * coefficient;
                 System.out.println("Количество бонусных баллов: "+bonus);
-                break;
             }
 
-        }
+
         /* в зависимости от команды выполните следующие действия:
            map - вывести на экран ссылку на карту;
            recyclability - 1. напечатать сообщение "Введите код переработки:",
