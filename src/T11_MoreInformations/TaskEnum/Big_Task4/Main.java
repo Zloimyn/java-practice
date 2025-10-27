@@ -17,17 +17,17 @@ public class Main {
 
         String commandValue = scanner.nextLine();
         while (true) {
-            if (ChatCommand.valueOf("MAP").equals(commandValue)){
+            if (ChatCommand.valueOf(commandValue) == ChatCommand.MAP){
                 System.out.println(mapLink);
                 break;
             }
-            if (commandValue.equals(ChatCommand.RECYCLABILITY)){
+            if (ChatCommand.valueOf(commandValue) == ChatCommand.RECYCLABILITY){
                 System.out.println("Введите код переработки: ");
                 int recyclability = scanner.nextInt();
                 isRecycled(recyclability);
                 break;
             }
-            if (commandValue.equals(ChatCommand.BONUS)){
+            if (ChatCommand.valueOf(commandValue) == ChatCommand.BONUS){
                 int coefficient = 0;
                 System.out.println("Введите количество вторсырья, кг: ");
                 int bonusS = scanner.nextInt();

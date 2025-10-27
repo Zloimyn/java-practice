@@ -1,4 +1,4 @@
-package FinanceApp;
+package A_FinanceApp;
 
 import java.util.Scanner;
 
