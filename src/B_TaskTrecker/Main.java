@@ -8,19 +8,43 @@ public class Main {
         Manager manager = new Manager();
 
         Task task = new Task("переезд","Купить вещи и обувь",Status.NEW);
-
         manager.createTask(task);
-        manager.updateTask(task);
-        manager.returnTaskId(task,1);
-        manager.allTasks();
+
+
+        Epic epic = new Epic("Переезд", "Задачи");
+        manager.createEpic(epic);
+
+        Subtask subtask1 = new Subtask("Купить коробки", "Заехать в магазин и взять большие коробки", Status.NEW, epic.getId());
+        Subtask subtask2 = new Subtask("Купить еду", "По пути заехать в магазин", Status.NEW, epic.getId());
+        manager.createSubtask(subtask1);
+        manager.createSubtask(subtask2);
+
+        System.out.println(epic.getStatus());
+
+        subtask1.setStatus(Status.DONE);
+        manager.updateSubtask(subtask1);
+
+        System.out.println(epic.getStatus());
+
+        Epic epic2 = new Epic("Прибраться","Задачи");
+        manager.createEpic(epic2);
+
+        Subtask subtask3 = new Subtask("Пропылесосить","Купить новый пылесос",Status.NEW, epic.getId());
+        manager.createSubtask(subtask3);
+
+        System.out.println(epic2.getStatus());
+
+        subtask3.setStatus(Status.NEW);
+        manager.updateSubtask(subtask3);
+
+        System.out.println(epic2.getStatus());
+
+        System.out.println("Tasks: "+ manager.allTasks() + ".Epics: " + manager.allEpics()+ ".Subtask: "+ manager.allSubtasks());
+
         manager.deleteIdTask(1);
+        manager.deleteIdEpic(2);
 
-
-
-
-
+        System.out.println(manager.allTasks() + " " + manager.allEpics());
     }
-
-
 
 }

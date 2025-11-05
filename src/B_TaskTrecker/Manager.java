@@ -1,5 +1,6 @@
 package B_TaskTrecker;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -28,8 +29,11 @@ public class Manager {
         managerId++;
 
         Epic epic = epics.get(subtask.getEpicId());
+        if (epic != null){
+            epic.addSubtaskid(subtask.getId());
+        }
 
-        updateEpic(subtask.getEpicId());
+        updateEpicStatus(subtask.getEpicId());
     }
 
     void returnTaskId(Task task,int userId){
@@ -56,23 +60,48 @@ public class Manager {
         epics.put(epic.getId(), epic);
     }
 
-    void allTasks(){
-        System.out.println("Список всех задач: ");
-        for (int i = 1; i < managerId; i++) {
-            System.out.println(tasks.get(i));
+    void updateSubtask(Subtask updatedSubtask){
+        int id = updatedSubtask.getId();
+
+        if (subtasks.containsKey(id)) {
+            subtasks.put(id, updatedSubtask);
+            updateEpicStatus(updatedSubtask.getEpicId());
         }
     }
 
-    void allEpics(){
-        System.out.println("Список всех задач: ");
+    ArrayList<Task> allTasks(){
+        ArrayList<Task> result = new ArrayList<>();
         for (int i = 1; i < managerId; i++) {
-            System.out.println(epics.get(i));
+            if (tasks.get(i) != null){
+                result.add(tasks.get(i));
+            }
         }
+        return result;
+    }
+
+    ArrayList<Epic> allEpics(){
+        ArrayList<Epic> result = new ArrayList<>();
+        for (int i = 1; i < managerId; i++) {
+            if (epics.get(i) != null){
+                result.add(epics.get(i));
+            }
+        }
+        return result;
+    }
+
+    ArrayList<Subtask> allSubtasks(){
+        ArrayList<Subtask> result = new ArrayList<>();
+        for (int i = 0; i < managerId; i++) {
+            if (subtasks.get(i) != null){
+                result.add(subtasks.get(i));
+            }
+        }
+        return result;
     }
 
 
     void deleteIdTask(int deleteId){
-        if (managerId < deleteId){
+        if (managerId != deleteId){
             System.out.println("Такой задачи не существует");
         }else {
             System.out.println("Задача была удалена: ");
@@ -82,7 +111,7 @@ public class Manager {
     }
 
     void deleteIdEpic(int deleteId){
-        if (managerId < deleteId){
+        if (managerId != deleteId){
             System.out.println("Такой задачи не существует");
         }else {
             System.out.println("Задача была удалена: ");
@@ -102,7 +131,33 @@ public class Manager {
     }
 
     void updateEpicStatus(int epicId){
+        Epic epic = epics.get(epicId);
+        ArrayList<Integer> subIds = epic.getSubtaskId();
+        if (subIds.isEmpty()) {
+            epic.setStatus(Status.NEW);
+            return;
+        }
 
+        boolean allNew = true;
+        boolean allDone = true;
+
+        for (int subId : subIds) {
+            Subtask sub = subtasks.get(subId);
+
+            if (sub.getStatus() != Status.NEW) {
+                allNew = false;
+            }
+            if (sub.getStatus() != Status.DONE) {
+                allDone = false;
+            }
+        }
+        if (allNew) {
+            epic.setStatus(Status.NEW);
+        } else if (allDone) {
+            epic.setStatus(Status.DONE);
+        } else {
+            epic.setStatus(Status.IN_PROGRESS);
+        }
     }
 
 

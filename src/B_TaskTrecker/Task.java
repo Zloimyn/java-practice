@@ -30,14 +30,6 @@ public class Task {
         this.name = name;
     }
 
-    public String getDescriptions() {
-        return descriptions;
-    }
-
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
-    }
-
     public Status getStatus() {
         return status;
     }
