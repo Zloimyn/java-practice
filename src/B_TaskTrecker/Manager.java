@@ -36,28 +36,14 @@ public class Manager {
         updateEpicStatus(subtask.getEpicId());
     }
 
-    void returnTaskId(Task task,int userId){
-        for (int i = 0; i < userId; i++) {
-            if (userId == task.getId()){
-                System.out.println("Задача с индефикатором  "+ userId + ": " + tasks.get(userId));
-            }
-        }
+
+
+    void updateTask(Task taskUpdate, Task taskOld){
+        tasks.put(taskOld.getId(), taskUpdate);
     }
 
-    void returnEpicID(Epic epic,int userId){
-        for (int i = 0; i < userId; i++) {
-            if (epic.getId() == userId){
-                System.out.println("Задача с индефикатором "+ userId + " "+ epics.get(userId));
-            }
-        }
-    }
-
-    void updateTask(Task task){
-        tasks.put(task.getId(), task);
-    }
-
-    void updateEpic(Epic epic){
-        epics.put(epic.getId(), epic);
+    void updateEpic(Epic epicUpdate,Epic epicOld){
+        epics.put(epicOld.getId(), epicUpdate);
     }
 
     void updateSubtask(Subtask updatedSubtask){
@@ -152,7 +138,7 @@ public class Manager {
             }
         }
         if (allNew) {
-            epic.setStatus(Status.NEW);
+            Epic epic1 = new Epic(epic.getName(),epic.getDescriptions(),Status.NEW);
         } else if (allDone) {
             epic.setStatus(Status.DONE);
         } else {

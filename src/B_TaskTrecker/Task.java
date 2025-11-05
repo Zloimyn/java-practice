@@ -19,22 +19,21 @@ public class Task {
     }
 
     public void setId(int id) {
-        this.id = id;
+        if (this.id != 0){
+            this.id = id;
+        }
+    }
+
+    public String getDescriptions() {
+        return descriptions;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }

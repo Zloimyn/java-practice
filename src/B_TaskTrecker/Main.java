@@ -34,8 +34,8 @@ public class Main {
 
         System.out.println(epic2.getStatus());
 
-        subtask3.setStatus(Status.NEW);
-        manager.updateSubtask(subtask3);
+        Subtask subtask4 = new Subtask(subtask1.getName(),subtask1.getDescriptions(),Status.DONE,subtask1.getEpicId());
+        manager.updateSubtask(subtask4);
 
         System.out.println(epic2.getStatus());
 
@@ -43,6 +43,9 @@ public class Main {
 
         manager.deleteIdTask(1);
         manager.deleteIdEpic(2);
+
+        Task task1 = new Task(task.getName(),task.getDescriptions(),Status.IN_PROGRESS);
+        manager.updateTask(task1,task);
 
         System.out.println(manager.allTasks() + " " + manager.allEpics());
     }
