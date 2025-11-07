@@ -120,7 +120,7 @@ public class Manager {
         Epic epic = epics.get(epicId);
         ArrayList<Integer> subIds = epic.getSubtaskId();
         if (subIds.isEmpty()) {
-            epic.setStatus(Status.NEW);
+//            epic.setStatus(Status.NEW);
             return;
         }
 
@@ -138,11 +138,11 @@ public class Manager {
             }
         }
         if (allNew) {
-            Epic epic1 = new Epic(epic.getName(),epic.getDescriptions(),Status.NEW);
+//            Epic epic1 = new Epic(epic.getName(),epic.getDescriptions(),Status.NEW);
         } else if (allDone) {
-            epic.setStatus(Status.DONE);
+//            epic.setStatus(Status.DONE);
         } else {
-            epic.setStatus(Status.IN_PROGRESS);
+//            epic.setStatus(Status.IN_PROGRESS);
         }
     }
 
