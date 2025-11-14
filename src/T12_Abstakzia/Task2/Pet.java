@@ -2,13 +2,19 @@ package T12_Abstakzia.Task2;
 
 public abstract class Pet {
     int pawsCount;
+    String voice;
+
+    public String getVoice() {
+        return voice;
+    }
 
     public int getPawsCount() {
         return pawsCount;
     }
 
-    public Pet(int pawsCount) {
+    public Pet(int pawsCount,String voice) {
         this.pawsCount = pawsCount;
+        this.voice = voice;
     }
 
     void sleep(){
@@ -19,5 +25,4 @@ public abstract class Pet {
         System.out.println("Играю");
     }
 
-    abstract void giveVoice();
 }
