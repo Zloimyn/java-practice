@@ -2,7 +2,6 @@ package B_TaskTrecker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Manager {
     private int managerId = 1;
@@ -30,12 +29,18 @@ public class Manager {
 
         Epic epic = epics.get(subtask.getEpicId());
         if (epic != null){
-            epic.addSubtaskid(subtask.getId());
+            epic.addSubtaskId(subtask.getId());
         }
 
         updateEpicStatus(subtask.getEpicId());
     }
 
+
+    Subtask setStatus(Subtask subtask,Status status){
+        Subtask subtask1 = new Subtask(subtask.getName(),subtask.getDescriptions(),status,subtask.getEpicId());
+        subtask1.setId(subtask.getId());
+        return subtask1;
+    }
 
 
     void updateTask(Task taskUpdate, Task taskOld){
@@ -117,10 +122,17 @@ public class Manager {
     }
 
     void updateEpicStatus(int epicId){
-        Epic epic = epics.get(epicId);
-        ArrayList<Integer> subIds = epic.getSubtaskId();
+        Epic epicNew = epics.get(epicId);
+        if (epicNew == null){
+            return;
+        }
+
+        ArrayList<Integer> subIds = epicNew.getSubtaskIds();
         if (subIds.isEmpty()) {
-//            epic.setStatus(Status.NEW);
+            Epic newEpic = new Epic(epicNew.getName(),epicNew.getDescriptions());
+            newEpic.setId(epicNew.getId());
+            newEpic.getSubtaskIds().addAll(subIds);
+            epics.put(epicId, newEpic);
             return;
         }
 
@@ -137,13 +149,21 @@ public class Manager {
                 allDone = false;
             }
         }
+
+        Status newStatus;
         if (allNew) {
-//            Epic epic1 = new Epic(epic.getName(),epic.getDescriptions(),Status.NEW);
+            newStatus = Status.NEW;
         } else if (allDone) {
-//            epic.setStatus(Status.DONE);
+            newStatus = Status.DONE;
         } else {
-//            epic.setStatus(Status.IN_PROGRESS);
+            newStatus = Status.IN_PROGRESS;
         }
+        Epic updateEpic = new Epic(epicNew.getName(),epicNew.getDescriptions());
+        updateEpic.setId(epicNew.getId());
+        updateEpic.getSubtaskIds().addAll(subIds);
+        updateEpic.status = newStatus;
+
+        epics.put(epicId,updateEpic);
     }
 
 

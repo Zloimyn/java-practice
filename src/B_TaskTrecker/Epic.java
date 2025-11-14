@@ -8,11 +8,11 @@ public class Epic extends Task {
         super(name, descriptions, Status.NEW);
     }
 
-    public ArrayList<Integer> getSubtaskId() {
+    public ArrayList<Integer> getSubtaskIds() {
         return subtaskIds;
     }
 
-    void addSubtaskid(int subtaskId){
+    void addSubtaskId(int subtaskId){
         subtaskIds.add(subtaskId);
     }
 

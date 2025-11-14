@@ -21,7 +21,7 @@ public class Main {
 
         System.out.println(epic.getStatus());
 
-//        subtask1.setStatus(Status.DONE);
+        manager.setStatus(subtask1,Status.DONE);
         manager.updateSubtask(subtask1);
 
         System.out.println(epic.getStatus());

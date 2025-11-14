@@ -6,7 +6,7 @@ public class Task {
     private int id;
     private String name;
     private String descriptions;
-    private Status status;
+    protected Status status;
 
     Task(String name,String descriptions,Status status){
         this.descriptions = descriptions;
