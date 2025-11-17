@@ -1,0 +1,31 @@
+package T12_Abstakzia.Polimarfism.Task2;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите свое имя: ");
+        String name = scanner.next();
+
+        System.out.println("Что " + name + " делает как работник:");
+        Employee employee = new SoftwareDeveloper(name);
+        employee.work();
+        System.out.println("Получает зарплату за месяц: " + employee.getSalary() + " тг.");
+        // Таких методов в интерфейсе Employee нет - произойдет ошибка
+        // employee.eat();
+        // employee.doDebug();
+
+        System.out.println("\nЧто " + name + " делает как человек:");
+        Person person = new SoftwareDeveloper(name);
+        person.eat();
+        person.sleep();
+        // Таких методов в классе Person нет - произойдет ошибка
+        // person.work();
+        // person.doDebug();
+
+        System.out.println("\nЧто " + name + " делает как программист:");
+        SoftwareDeveloper softwareDeveloper = new SoftwareDeveloper(name);
+        softwareDeveloper.doDebug();
+        softwareDeveloper.think();
+    }
+}
