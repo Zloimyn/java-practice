@@ -6,7 +6,7 @@ public class CellularPhone extends Phone {
         super(number);
     }
 
-    public final void call(String targetNumber) {
+    public final void makeCall(String targetNumber, String messageText) {
         System.out.println("Набираем номер " + targetNumber + " и звоним по сотовой связи");
     }
 }

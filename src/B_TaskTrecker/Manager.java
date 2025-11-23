@@ -36,19 +36,14 @@ public class Manager {
     }
 
 
-    Subtask setStatus(Subtask subtask,Status status){
-        Subtask subtask1 = new Subtask(subtask.getName(),subtask.getDescriptions(),status,subtask.getEpicId());
-        subtask1.setId(subtask.getId());
-        return subtask1;
-    }
-
-
-    void updateTask(Task taskUpdate, Task taskOld){
-        tasks.put(taskOld.getId(), taskUpdate);
+    void updateTask(Task task){
+        tasks.put(task.getId(),task);
     }
 
     void updateEpic(Epic epicUpdate,Epic epicOld){
         epics.put(epicOld.getId(), epicUpdate);
+        updateEpicStatus(epicUpdate.getId());
+        // решить проблему с подзадачами
     }
 
     void updateSubtask(Subtask updatedSubtask){
@@ -129,10 +124,6 @@ public class Manager {
 
         ArrayList<Integer> subIds = epicNew.getSubtaskIds();
         if (subIds.isEmpty()) {
-            Epic newEpic = new Epic(epicNew.getName(),epicNew.getDescriptions());
-            newEpic.setId(epicNew.getId());
-            newEpic.getSubtaskIds().addAll(subIds);
-            epics.put(epicId, newEpic);
             return;
         }
 
@@ -158,13 +149,10 @@ public class Manager {
         } else {
             newStatus = Status.IN_PROGRESS;
         }
-        Epic updateEpic = new Epic(epicNew.getName(),epicNew.getDescriptions());
+        Epic updateEpic = new Epic(epicNew.getName(),epicNew.getDescriptions(),newStatus);
         updateEpic.setId(epicNew.getId());
         updateEpic.getSubtaskIds().addAll(subIds);
-        updateEpic.status = newStatus;
 
         epics.put(epicId,updateEpic);
     }
-
-
 }

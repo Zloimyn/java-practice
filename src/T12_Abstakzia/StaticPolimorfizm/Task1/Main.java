@@ -15,12 +15,15 @@ public class Main {
         System.out.println("Выберите модель телефона собеседника, 1 - стационарный телефон, 2 - мобильный телефон, 3 - смартфон:");
         int type = scanner.nextInt();
 
+        String message = " ";
         if (type < 1 || type > 3) {
             System.out.println("Введена неверная модель телефона");
-            return;
+        }else if (type == 2 || type == 3) {
+            System.out.println("Какое сообщение вы хотите переслать?");
+            message = scanner.next();
         }
 
-        getPhone(type, number).makeCall(friendNumber);
+        getPhone(type, number).makeCall(friendNumber,message);
     }
 
     public static Phone getPhone(int type, String number) {

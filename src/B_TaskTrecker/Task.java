@@ -8,6 +8,12 @@ public class Task {
     private String descriptions;
     protected Status status;
 
+    Task(String name,String descriptions){
+        this.descriptions = descriptions;
+        this.name = name;
+        this.status = Status.NEW;
+    }
+
     Task(String name,String descriptions,Status status){
         this.descriptions = descriptions;
         this.name = name;

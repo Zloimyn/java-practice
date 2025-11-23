@@ -7,7 +7,7 @@ public class Phone {
         this.number = number;
     }
 
-    public void makeCall(String targetNumber) {
+    public void makeCall(String targetNumber,String messageText) {
         System.out.println("Звоним с номера " + number);
         System.out.println("Набираем номер " + targetNumber + " и звоним по сотовой связи");
         System.out.println("Привет!");

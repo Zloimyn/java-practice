@@ -6,7 +6,7 @@ public class Smartphone extends MobilePhone {
         super(number);
     }
 
-    public void sendEmail(String email, String messageText) {
+    public void makeCall(String email, String messageText) {
         System.out.println("Напишем другу сообщение " + messageText + " по email " + email);
     }
 }

@@ -5,7 +5,7 @@ public class MobilePhone extends Phone  {
         super(number);
     }
 
-    public final void sendSms(String targetNumber, String messageText) {
+    public void makeCall(String targetNumber, String messageText) {
         System.out.println("Отправляем сообщение " + messageText + " по номеру " + targetNumber);
     }
 }
