@@ -1,12 +1,13 @@
-package T12_Abstakzia.Djeneriki.Task2;
+package T12_Abstakzia.Djeneriki.Task1.Task2;
 
-public class MortgageAmountValidationRule {
+public class MortgageAmountValidationRule extends ValidationRule<Integer>{
     public MortgageAmountValidationRule(Integer value) {
         super(value, "Минимальный размер ипотеки - 1.000.000, а максимальный - 10.000.000");
     }
 
     // Объявите и реализуйте метод для проверки суммы ипотеки ниже
-    public boolean isValid (Integer value){
+    @Override
+    public boolean isValid (){
         if (value >= 1_000_000 || value <= 10_000_000){
             return true;
         }else {

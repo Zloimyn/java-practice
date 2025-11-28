@@ -1,6 +1,6 @@
-package T12_Abstakzia.Djeneriki.Task2;
+package T12_Abstakzia.Djeneriki.Task1.Task2;
 
-public class AgeValidationRule {
+public class AgeValidationRule extends ValidationRule<Byte> {
     public AgeValidationRule(Byte age) {
         super(age, "Возраст для подачи на ипотеку должен быть старше 18 лет");
     }

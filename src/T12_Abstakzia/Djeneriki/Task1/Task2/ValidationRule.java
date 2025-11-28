@@ -1,10 +1,10 @@
-package T12_Abstakzia.Djeneriki.Task2;
+package T12_Abstakzia.Djeneriki.Task1.Task2;
 
-public class ValidationRule {
-    protected final int value;
+public abstract class ValidationRule<T> {
+    protected final T value;
     private final String errorMessage;
 
-    protected ValidationRule(int value, String errorMessage) {
+    protected ValidationRule(T value, String errorMessage) {
         this.value = value;
         this.errorMessage = errorMessage;
     }

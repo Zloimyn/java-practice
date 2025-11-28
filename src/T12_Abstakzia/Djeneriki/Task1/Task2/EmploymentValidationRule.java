@@ -1,6 +1,6 @@
-package T12_Abstakzia.Djeneriki.Task2;
+package T12_Abstakzia.Djeneriki.Task1.Task2;
 
-public class EmploymentValidationRule {
+public class EmploymentValidationRule extends ValidationRule<Boolean>{
     public EmploymentValidationRule(Boolean value) {
         super(value, "Ипотека выдается только трудоустроенным");
     }
@@ -11,6 +11,6 @@ public class EmploymentValidationRule {
     }
 
     public String getErrorMessage() {
-        System.out.println("Вы не трудоустроены");
+        return "Вы не трудоустроены";
     }
 }

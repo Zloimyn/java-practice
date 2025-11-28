@@ -1,4 +1,4 @@
-package T12_Abstakzia.Djeneriki.Task2;
+package T12_Abstakzia.Djeneriki.Task1.Task2;
 
 public class MortgageRequest {
     private final String name;
@@ -25,7 +25,7 @@ public class MortgageRequest {
         }
 
         MortgageAmountValidationRule amountValidationRule = new MortgageAmountValidationRule(amount);
-        if (!amountValidationRule.isValid(amount)) {
+        if (!amountValidationRule.isValid()) {
             result = false;
             System.out.println(amountValidationRule.getErrorMessage());
         }
