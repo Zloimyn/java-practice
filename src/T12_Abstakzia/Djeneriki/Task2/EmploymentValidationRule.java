@@ -1,4 +1,4 @@
-package T12_Abstakzia.Djeneriki.Task1.Task2;
+package T12_Abstakzia.Djeneriki.Task2;
 
 public class EmploymentValidationRule extends ValidationRule<Boolean>{
     public EmploymentValidationRule(Boolean value) {
@@ -10,7 +10,4 @@ public class EmploymentValidationRule extends ValidationRule<Boolean>{
         return value;
     }
 
-    public String getErrorMessage() {
-        return "Вы не трудоустроены";
-    }
 }

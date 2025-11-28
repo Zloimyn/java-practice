@@ -1,4 +1,4 @@
-package T12_Abstakzia.Djeneriki.Task1.Task2;
+package T12_Abstakzia.Djeneriki.Task2;
 
 public abstract class ValidationRule<T> {
     protected final T value;

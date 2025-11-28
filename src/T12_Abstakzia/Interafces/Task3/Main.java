@@ -1,4 +1,4 @@
-package T12_Abstakzia.InterafcTask3;
+package T12_Abstakzia.Interafces.Task3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,10 @@ public class Main {
                 String title = scanner.next();
                 System.out.println("Введите количество серий:");
                 int seriesCount = scanner.nextInt();
-                System.out.println("Введите среднюю длительность серии в минутах");
+                System.out.println("Введите среднюю длительность серии в минутах:");
                 int runtime = scanner.nextInt();
 
+//                int totalTime = seriesCount * runtime;
                 // Создайте сериал и добавьте его в список просмотренных
                 Series series = new Series(title,runtime,seriesCount);
                 mediaItems.add(series);
@@ -54,7 +55,7 @@ public class Main {
         System.out.println("Вы посмотрели фильмов и сериалов: " + mediaItems.size());
         // Допишите вывод названий всех просмотренных фильмов и сериалов
         for (int i = 0; i < mediaItems.size(); i++) {
-            System.out.println(mediaItems.get(i));
+            System.out.println(mediaItems.get(i).getTitle());
         }
     }
 

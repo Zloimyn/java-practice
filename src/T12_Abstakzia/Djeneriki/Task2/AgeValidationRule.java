@@ -1,4 +1,4 @@
-package T12_Abstakzia.Djeneriki.Task1.Task2;
+package T12_Abstakzia.Djeneriki.Task2;
 
 public class AgeValidationRule extends ValidationRule<Byte> {
     public AgeValidationRule(Byte age) {
@@ -10,7 +10,4 @@ public class AgeValidationRule extends ValidationRule<Byte> {
         return value >= 18;
     }
 
-    public String getErrorMessage() {
-        return "Ваш возраст меньше 18";
-    }
 }

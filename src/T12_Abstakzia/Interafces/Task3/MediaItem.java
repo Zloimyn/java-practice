@@ -1,4 +1,4 @@
-package T12_Abstakzia.InterafcTask3;
+package T12_Abstakzia.Interafces.Task3;
 
 public interface MediaItem {
 

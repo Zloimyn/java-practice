@@ -1,4 +1,4 @@
-package T12_Abstakzia.Djeneriki.Task1.Task2;
+package T12_Abstakzia.Djeneriki.Task2;
 
 public class MortgageAmountValidationRule extends ValidationRule<Integer>{
     public MortgageAmountValidationRule(Integer value) {
@@ -8,14 +8,10 @@ public class MortgageAmountValidationRule extends ValidationRule<Integer>{
     // Объявите и реализуйте метод для проверки суммы ипотеки ниже
     @Override
     public boolean isValid (){
-        if (value >= 1_000_000 || value <= 10_000_000){
+        if (value >= 1_000_000 && value <= 10_000_000){
             return true;
         }else {
             return false;
         }
-    }
-
-    public String getErrorMessage() {
-        return "Ваша сумма не подходит";
     }
 }
