@@ -7,10 +7,10 @@ import java.util.Scanner;
 public class Main {
 
     // Дополните объявление поля friendsContactBook, которое будет хранить в себе список номеров телефонов друзей
-    private static ContactBook<Phone>  friendsContactBook = new ContactBook<>();
-    private static ContactBook<Email> colleaguesContactBook = new ContactBook<>();
-    private static ContactBook<SocialNetworkContact> classmatesContactBook = new ContactBook<>();
-    private static ContactBook<Address> relativesContactBook = new ContactBook<>();
+    final private static ContactBook<Phone>  friendsContactBook = new ContactBook<>();
+    final private static ContactBook<Email> colleaguesContactBook = new ContactBook<>();
+    final private static ContactBook<SocialNetworkContact> classmatesContactBook = new ContactBook<>();
+    final private static ContactBook<Address> relativesContactBook = new ContactBook<>();
 
             // Напишите объявления полей colleaguesContactBook, classmatesContactBook и relativesContactBook,
             // которые будут хранить списки электронных адресов, соцсетей и почтовых адресов соответственно
