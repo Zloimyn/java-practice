@@ -2,14 +2,15 @@ package B_V2_TaskTrecker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
     private int managerId = 1;
+    InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
 
     private HashMap<Integer, Task> tasks = new HashMap<>();
     private HashMap<Integer, Subtask> subtasks = new HashMap<>();
     private HashMap<Integer, Epic> epics = new HashMap<>();
-    private ArrayList<Task> history = new ArrayList<>();
 
     public void createTask(Task task){
         task.setId(managerId);
@@ -91,7 +92,9 @@ public class InMemoryTaskManager implements TaskManager {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(userId) != null){
                 result.add(tasks.get(userId));
-                history.add(tasks.get(userId));
+                historyManager.add(tasks.get(userId));
+            }else {
+                System.out.println("Такой задачи нету!");
             }
         }
         return result;
@@ -166,15 +169,5 @@ public class InMemoryTaskManager implements TaskManager {
 
         epics.put(epicId,updateEpic);
     }
-
-    public ArrayList<Task> getHistory() {
-        ArrayList<Task> historys = new ArrayList<>();
-
-        for (int i = 0; i < this.history.size(); i++) {
-            historys.add(this.history.get(i));
-        }
-        return historys;
-    }
-
 
 }

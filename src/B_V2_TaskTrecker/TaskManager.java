@@ -27,4 +27,7 @@ public interface TaskManager {
     void deleteAllEpic();
     void updateEpicStatus(int epicId);
 
+    // Служебные методы:::
+//    HistoryManager getDefaultHistory();
+
 }

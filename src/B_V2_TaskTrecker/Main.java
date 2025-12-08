@@ -3,6 +3,7 @@ package B_V2_TaskTrecker;
 public class Main {
     public static void main(String[] args) {
         InMemoryTaskManager manager = new InMemoryTaskManager();
+        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
 
         Task task = new Task("переезд","Купить вещи и обувь", Status.NEW);
         manager.createTask(task);
@@ -11,7 +12,7 @@ public class Main {
         Epic epic = new Epic("Переезд", "Задачи");
         manager.createEpic(epic);
 
-        manager.getHistory();
+
 
         Subtask subtask1 = new Subtask("Купить коробки", "Заехать в магазин и взять большие коробки", Status.NEW, epic.getId());
         Subtask subtask2 = new Subtask("Купить еду", "По пути заехать в магазин", Status.NEW, epic.getId());
@@ -30,7 +31,6 @@ public class Main {
         Subtask subtask3 = new Subtask("Пропылесосить","Купить новый пылесос", Status.NEW, epic.getId());
         manager.createSubtask(subtask3);
 
-        System.out.println(manager.getHistory());
 
         System.out.println(epic2.getStatus());
 
@@ -47,10 +47,21 @@ public class Main {
         Task task1 = new Task(task.getName(),task.getDescriptions(), Status.IN_PROGRESS);
         task1.setId(task.getId());
         manager.updateTask(task1);
+        System.out.println(" ");
+        System.out.println(" ");
+
 
         System.out.println(manager.getTask(0));
+        System.out.println(manager.getTask(1));
+        System.out.println(manager.getTask(0));
+        System.out.println(manager.getTask(1));
+        System.out.println(manager.getTask(1));
+        System.out.println(manager.getTask(1));
 
-        System.out.println(manager.getHistory());
+
+        historyManager.add(task);
+        System.out.println(historyManager.getHistory());
+
     }
 
 }
