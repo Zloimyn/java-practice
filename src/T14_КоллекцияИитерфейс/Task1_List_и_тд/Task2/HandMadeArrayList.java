@@ -1,11 +1,17 @@
-package T14_КоллекцияИитерфейс.Task1_List_и_тд;
+package T14_КоллекцияИитерфейс.Task1_List_и_тд.Task2;
+
+import java.util.Arrays;
 
 public class HandMadeArrayList<T> {
     private int size = 0;
-    private Object[] elements;
+    private T[] elements;
 
     public HandMadeArrayList() {
-        this.elements = new Object[10];
+        this.elements = (T[]) new Object[10];
+    }
+
+    public HandMadeArrayList(int elements) {
+        this.elements = (T[]) new Object[elements];
     }
 
     /**
@@ -18,7 +24,9 @@ public class HandMadeArrayList<T> {
             grow();
         }
 
-        Object[] newElements = new Object[elements.length + 1];
+        elements[size] = newElement;
+        size++;
+
         /* Допишите код, который добавит очередной элемент в массив
            и увеличит размер массива на единицу.*/
     }
@@ -30,12 +38,16 @@ public class HandMadeArrayList<T> {
         return (T) this.elements[index];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Заменяем текущий массив элементов elements на новый с вместимостью +50%
      */
     private void grow() {
         // Новый массив
-        Object[] newArray = new Object[elements.length + elements.length / 2];
+        T[] newArray = (T[]) new Object[elements.length + elements.length / 2];
 
         for (int i = 0; i < elements.length; i++) {
             newArray[i] = elements[i];
@@ -47,11 +59,8 @@ public class HandMadeArrayList<T> {
         this.elements = newArray;
     }
 
-    public static void main(String[] args) {
-        final HandMadeArrayList<Integer> arr = new HandMadeArrayList<>();
-        for (int i = 0; i < 2000; i++) {
-            arr.add(i);
-        }
-        System.out.println(arr.size);
+    public T[] getElements(){
+        return elements;
     }
+
 }

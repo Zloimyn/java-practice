@@ -11,7 +11,6 @@ public class InMemoryHistoryManager implements HistoryManager{
         for (int i = 0; i < history.size(); i++) {
             if (history.get(i) != null){
                 if (history.size() > 10){
-                    history.removeFirst();
                 }
             }
         }
