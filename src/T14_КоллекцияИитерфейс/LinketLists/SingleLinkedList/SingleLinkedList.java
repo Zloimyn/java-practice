@@ -1,4 +1,4 @@
-package T14_КоллекцияИитерфейс.LinketLists.Task1;
+package T14_КоллекцияИитерфейс.LinketLists.SingleLinkedList;
 
 public class SingleLinkedList<T> {
     public Node<T> head;
