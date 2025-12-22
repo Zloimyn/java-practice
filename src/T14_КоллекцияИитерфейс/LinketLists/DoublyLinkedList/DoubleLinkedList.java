@@ -56,12 +56,6 @@ public class DoubleLinkedList<T> {
 
         Node<T> newNode = new Node<>(newElement);
 
-        if (current == head && current == tail) {
-            head = newNode;
-            tail = newNode;
-            return;
-        }
-
         if (current == head) {
             newNode.next = head.next;
             head.next.prev = newNode;
@@ -76,16 +70,21 @@ public class DoubleLinkedList<T> {
             return;
         }
 
-        Node<T> prevNode = current.prev;
-        Node<T> nextNode = current.next;
-
-        prevNode.next = newNode;
-        newNode.prev = prevNode;
-
-        newNode.next = nextNode;
-        nextNode.prev = newNode;
     }
 
+    private String nodeToString(Node node){
+        return "   ↔  " + size+ " index:" + node.data + "   ↔  ";
+    }
+
+    public String toString(){
+        Node node;
+        for (int i = 2; i < size ; i++) {
+            node = head;
+            node = node.next;
+            nodeToString(node);
+        }
+        return "head: " + head.data + "  ↔  " +  + "  ↔  " + "tail: " + tail.data;
+    }
 }
 
 class Node<T>{
