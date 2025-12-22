@@ -170,4 +170,8 @@ public class InMemoryTaskManager implements TaskManager {
         epics.put(epicId,updateEpic);
     }
 
+    public List<Task> getDefaultHistory(){
+        return  historyManager.getHistory();
+    }
+
 }

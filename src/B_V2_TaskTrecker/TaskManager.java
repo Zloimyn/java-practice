@@ -1,6 +1,7 @@
 package B_V2_TaskTrecker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
 
@@ -28,6 +29,6 @@ public interface TaskManager {
     void updateEpicStatus(int epicId);
 
     // Служебные методы:::
-//    HistoryManager getDefaultHistory();
+    List<Task> getDefaultHistory();
 
 }
