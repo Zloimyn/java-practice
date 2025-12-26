@@ -11,21 +11,23 @@ public interface TaskManager {
 
 
     void updateTask(Task task);
-    void updateEpic(Epic epicUpdate, Epic epicOld);
+    void updateEpic(Epic epicUpdate);
     void updateSubtask(Subtask updatedSubtask);
 
     ArrayList<Task> allTasks();
     ArrayList<Epic> allEpics();
     ArrayList<Subtask> allSubtasks();
     ArrayList<Task> getTask(int userId);
-//    ArrayList<Epic> getEpic();
-//    ArrayList<Subtask> getsubtask();
+    ArrayList<Epic> getEpic(int userId);
+    ArrayList<Subtask> getSubtask(int userId);
 
 
     void deleteIdTask(int deleteId);
     void deleteIdEpic(int deleteId);
+    void deleteIdSubtask(int deleteId);
     void deleteAllTask();
     void deleteAllEpic();
+    void deleteAllSubtask();
     void updateEpicStatus(int epicId);
 
     // Служебные методы:::

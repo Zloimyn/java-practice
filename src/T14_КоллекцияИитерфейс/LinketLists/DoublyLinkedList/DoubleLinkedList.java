@@ -72,18 +72,21 @@ public class DoubleLinkedList<T> {
 
     }
 
-    private String nodeToString(Node node){
-        return "   ↔  " + size+ " index:" + node.data + "   ↔  ";
+    private String nodeToString(Node<T> node,int index){
+        return "   ↔  " + "Index- " + index + " Значение: "+ node.data;
     }
 
     public String toString(){
-        Node node;
-        for (int i = 2; i < size ; i++) {
-            node = head;
+        int index = 0;
+        Node<T> node = head;
+        String result = "";
+
+        while (node != null){
+            result = result + nodeToString(node,index);
             node = node.next;
-            nodeToString(node);
+            index++;
         }
-        return "head: " + head.data + "  ↔  " +  + "  ↔  " + "tail: " + tail.data;
+        return result;
     }
 }
 

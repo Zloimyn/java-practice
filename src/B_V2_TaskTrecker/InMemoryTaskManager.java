@@ -42,10 +42,13 @@ public class InMemoryTaskManager implements TaskManager {
         tasks.put(task.getId(),task);
     }
 
-    public void updateEpic(Epic epicUpdate, Epic epicOld){
-        epics.put(epicOld.getId(), epicUpdate);
-        updateEpicStatus(epicUpdate.getId());
-        // решить проблему с подзадачами
+    public void updateEpic(Epic epicUpdate){
+        int id = epicUpdate.getId();
+
+        if (epics.containsKey(id)) {
+            epics.put(id, epicUpdate);
+            updateEpicStatus(id);
+        }
     }
 
     public void updateSubtask(Subtask updatedSubtask){
@@ -53,7 +56,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         if (subtasks.containsKey(id)) {
             subtasks.put(id, updatedSubtask);
-            updateEpicStatus(updatedSubtask.getEpicId());
+            updateEpicStatus(id);
         }
     }
 
@@ -93,6 +96,35 @@ public class InMemoryTaskManager implements TaskManager {
             if (tasks.get(userId) != null){
                 result.add(tasks.get(userId));
                 historyManager.add(tasks.get(userId));
+                return result;
+            }else {
+                System.out.println("Такой задачи нету!");
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Subtask> getSubtask(int userId){
+        ArrayList<Subtask> result = new ArrayList<>();
+        for (int i = 0; i < subtasks.size(); i++) {
+            if (subtasks.get(userId) != null){
+                result.add(subtasks.get(userId));
+                historyManager.add(subtasks.get(userId));
+                return result;
+            }else {
+                System.out.println("Такой задачи нету!");
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Epic> getEpic(int userId){
+        ArrayList<Epic> result = new ArrayList<>();
+        for (int i = 0; i < epics.size(); i++) {
+            if (epics.get(userId) != null){
+                result.add(epics.get(userId));
+                historyManager.add(epics.get(userId));
+                return result;
             }else {
                 System.out.println("Такой задачи нету!");
             }
@@ -120,6 +152,16 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
+    public void deleteIdSubtask(int deleteId){
+        if (managerId != deleteId){
+            System.out.println("Такой задачи не существует");
+        }else {
+            System.out.println("Задача была удалена: ");
+            System.out.println(subtasks.get(deleteId));
+            subtasks.remove(deleteId);
+        }
+    }
+
     public void deleteAllTask(){
         System.out.println("Все задачи были удалены: ");
         tasks.clear();
@@ -128,6 +170,11 @@ public class InMemoryTaskManager implements TaskManager {
     public void deleteAllEpic() {
         System.out.println("Все задачи были удалены: ");
         epics.clear();
+    }
+
+    public void deleteAllSubtask(){
+        System.out.println("Все задачи были удалены: ");
+        subtasks.clear();
     }
 
     public void updateEpicStatus(int epicId){
