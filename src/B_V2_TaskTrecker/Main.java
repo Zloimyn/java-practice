@@ -74,16 +74,15 @@ public class Main {
 
     void printMenu(Scanner scanner){
         System.out.println("Введите число: ");
-        int userPrint = scanner.nextInt();
         System.out.println("1- Создать новую задачу");
-        System.out.println("2- Найти задачу");
-        System.out.println("3- Создать новую задачу");
+        System.out.println("2- Создать новый эпик");
+        System.out.println("3- Создать новую подзадачу");
+        System.out.println("4- Найти задачу");
         System.out.println("4- Удалить задачу");
         System.out.println("5- Обновить задачу");
         System.out.println("6- Очистить список задач");
         System.out.println("7- Вывести список задач");
         System.out.println("8- Выход из программы");
-
     }
 
 }
