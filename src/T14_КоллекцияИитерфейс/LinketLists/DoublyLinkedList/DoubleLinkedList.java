@@ -164,7 +164,7 @@ public class DoubleLinkedList<T> {
         Node<T> node = head;
         String result = "";
 
-        while (node != null){
+        for (int i = 0; i < size; i++) {
             result = result + nodeToString(node,index);
             node = node.next;
             index++;

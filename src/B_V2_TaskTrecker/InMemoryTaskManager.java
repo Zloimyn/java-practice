@@ -98,7 +98,6 @@ public class InMemoryTaskManager implements TaskManager {
                 historyManager.add(tasks.get(userId));
                 return result;
             }else {
-                System.out.println("Такой задачи нету!");
             }
         }
         return result;
@@ -112,7 +111,6 @@ public class InMemoryTaskManager implements TaskManager {
                 historyManager.add(subtasks.get(userId));
                 return result;
             }else {
-                System.out.println("Такой задачи нету!");
             }
         }
         return result;
@@ -126,7 +124,6 @@ public class InMemoryTaskManager implements TaskManager {
                 historyManager.add(epics.get(userId));
                 return result;
             }else {
-                System.out.println("Такой задачи нету!");
             }
         }
         return result;
@@ -219,6 +216,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     public List<Task> getDefaultHistory(){
         return  historyManager.getHistory();
+    }
+
+    public int getSize(){
+        return managerId;
     }
 
 }

@@ -23,7 +23,7 @@ public class Task {
     }
 
     public void setId(int id) {
-        if (this.id != 0){
+        if (this.id == 0){
             this.id = id;
         }
     }
