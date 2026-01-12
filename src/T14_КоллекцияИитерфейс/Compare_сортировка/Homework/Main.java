@@ -11,7 +11,7 @@ public class Main {
         System.out.println("Фильм должен быть вернут до: " + film1.getTimeOfReturn());
 
 
-        DateTime today = new DateTime(28, 11, 2021, 23, 58, 59);
+        DateTime today = new DateTime(27, 11, 2021, 23, 58, 58);
 
         System.out.println("Сегодняшнее число: " + today);
 
