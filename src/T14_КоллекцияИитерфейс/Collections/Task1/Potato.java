@@ -30,11 +30,11 @@ public class Potato implements Comparable<Potato> {
 
     @Override
     public int compareTo(Potato o) {
-        return Integer.compare(this.calculateAlpha(o),o.calculateAlpha(o));
+        return Integer.compare(this.calculateAlpha(),o.calculateAlpha());
     }
 
-    public int calculateAlpha(Potato o){
-        return (int) (o.weight * 0.5 + o.length * 0.65 + o.girth * 0.80);
+    public int calculateAlpha(){
+        return (int) (this.weight * 0.5 + this.length * 0.65 + this.girth * 0.80);
     }
 
     @Override

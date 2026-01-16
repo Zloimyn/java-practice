@@ -30,8 +30,11 @@ public class Main {
         totalList.add(potatoList.get(0));
         totalList.add(potatoList.get(1));
 
-        totalList.add(potatoList.get(5));
-        totalList.add(potatoList.get(6));
+        int a = potatoes.size();
+        a -= 2;
+        totalList.add(potatoList.get(a));
+        a += 1;
+        totalList.add(potatoList.get(a));
 
 				/* Вычислите две самые большие и две самые маленькие картофелины,
            а затем выведите их в порядке от самых маленьких до самых больших.*/
