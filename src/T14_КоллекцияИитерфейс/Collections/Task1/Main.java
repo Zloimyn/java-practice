@@ -24,12 +24,17 @@ public class Main {
 
     private static List<Potato> findPotatoesForExperiment(List<Potato> potatoes) {
         ArrayList<Potato> potatoList = new ArrayList<>(potatoes);
-        potatoList.remove(Collections.min(potatoes));
-        potatoList.remove(Collections.max(potatoes));
-        Collections.min(potatoes);
-        Collections.max(potatoes);
+        Collections.sort(potatoList);
+        ArrayList<Potato> totalList  = new ArrayList<>();
+
+        totalList.add(potatoList.get(0));
+        totalList.add(potatoList.get(1));
+
+        totalList.add(potatoList.get(5));
+        totalList.add(potatoList.get(6));
+
 				/* Вычислите две самые большие и две самые маленькие картофелины,
            а затем выведите их в порядке от самых маленьких до самых больших.*/
-        return potatoList;
+        return totalList;
     }
 }
