@@ -16,7 +16,7 @@ public class misterPresident {
             System.out.println("Сколько голосов вы хотите внести: ");
             int userGolosa = scanner.nextInt();
             if (misterPresidents.containsKey(userNum)){
-                misterPresidents.put(userNum, misterPresidents.get(userNum));
+                misterPresidents.put(userNum, userGolosa + misterPresidents.get(userNum));
             }else {
                 misterPresidents.put(userNum, userGolosa);
             }
