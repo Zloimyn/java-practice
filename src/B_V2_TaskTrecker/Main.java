@@ -2,6 +2,7 @@ package B_V2_TaskTrecker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -86,6 +87,9 @@ public class Main {
                 break;
             }
         }
+
+// мне нужно чтобы printGet у меня нормально выводился в мейне
+
     }
 
     public static void printMenu(){
@@ -105,40 +109,44 @@ public class Main {
         System.out.println("3-Subtask");
     }
 
-    public static void printTaskGet(Task task){
-        System.out.println("Ваша задача найдена: ");
-        System.out.println("Имя: ");
-        System.out.print(task.getName());
-        System.out.print(", ");
-        System.out.println("Описание: ");
-        System.out.print(task.getDescriptions());
-        System.out.print(", ");
-        System.out.println("Статус: ");
-        System.out.print(task.getStatus());
+    public static Task printGet(Task task){
+        return task;
     }
 
-    public static void printEpicGet(Epic epic){
-        System.out.println("Ваша задача найдена: ");
-        System.out.println("Имя: ");
-        System.out.print(epic.getName());
-        System.out.print(", ");
-        System.out.println("Описание: ");
-        System.out.print(epic.getDescriptions());
-        System.out.print(", ");
-        System.out.println("Статус: ");
-        System.out.print(epic.getStatus());
+    public static Task printGet(Epic epic){
+        return epic;
     }
 
-    public static void printSubtaskGet(Subtask subtask){
-        System.out.println("Ваша задача найдена: ");
-        System.out.println("Имя: ");
-        System.out.print(subtask.getName());
-        System.out.print(", ");
-        System.out.println("Описание: ");
-        System.out.print(subtask.getDescriptions());
-        System.out.print(", ");
-        System.out.println("Статус: ");
-        System.out.print(subtask.getStatus());
+    public static Task printGet(Subtask subtask){
+        return subtask;
+    }
+
+    public static Task findTasksName(String nameOrDescption,HashMap<Integer,Task> mapaTasks){
+            if (nameOrDescption == null){
+                System.out.println("Нету значения");
+                return null;
+            }
+            for (Task task : mapaTasks.values()){
+                if (task.getName().equals(nameOrDescption)){
+                    return printGet(task);
+                }
+            }
+            for (Task task : mapaTasks.values()){
+                if (task.getDescriptions().equals(nameOrDescption)){
+                    return printGet(task);
+                }
+            }
+            System.out.println("Неверно!");
+            return null;
+    }
+
+    static Task findTasksId(int userNum,HashMap<Integer,Task> mapaTasks){
+        if (mapaTasks.containsKey(userNum)){
+            return printGet(mapaTasks.get(userNum));
+        }else {
+            System.out.println("Такой задачи нету");
+        }
+        return null;
     }
 
     public static void createTask(Scanner scanner,InMemoryTaskManager manager){
@@ -175,87 +183,26 @@ public class Main {
     }
 
     public static void findTasks(Scanner scanner,InMemoryTaskManager manager){
-        ArrayList<Task> listTasks = new ArrayList<>();
+        HashMap<Integer,Task> mapaTasks = new HashMap<>();
+        for (Task task : manager.allTasks()){
+            mapaTasks.put(task.getId(), task);
+        }
+        for (Epic epic : manager.allEpics()){
+            mapaTasks.put(epic.getId(), epic);
+        }
+        for (Subtask subtask : manager.allSubtasks()){
+            mapaTasks.put(subtask.getId(), subtask);
+        }
         System.out.println("1.- Найти задачу по имени или описанию");
         System.out.println("2.- Найти задачу по ID");
         int userChoose = scanner.nextInt();
         if (userChoose == 1){
-            for (Task task : manager.allTasks()){
-                listTasks.add(task);
-            }
-            for (Epic epic : manager.allEpics()){
-                listTasks.add(epic);
-            }
-            for (Subtask subtask : manager.allSubtasks()){
-                listTasks.add(subtask);
-            }
-            System.out.println("1.- По имени");
-            System.out.println("2.- По описанию");
-            int userChooseType = scanner.nextInt();
-            if (userChooseType == 1){
-                String nameTask = scanner.next();
-                if (listTasks.equals(nameTask)){
-                    System.out.println("Ваша задача найдена: ");
-                }
-                for (Task task : manager.allTasks()) {
-                    if (task.equals(nameTask)){
-                        printTaskGet(task);
-                    }
-                }
-                for (Epic epic : manager.allEpics()) {
-                    if (epic.equals(nameTask)) {
-                        printEpicGet(epic);
-                    }
-                }
-                for (Subtask subtask : manager.allSubtasks()) {
-                    if (subtask.equals(nameTask)) {
-                        printSubtaskGet(subtask);
-                    }
-                }
-            } else if (userChooseType == 2) {
-                String desciptionTask = scanner.next();
-                for (Task task : manager.allTasks()) {
-                    if (task.equals(desciptionTask)){
-                        printTaskGet(task);
-                    }
-                }
-                for (Epic epic : manager.allEpics()) {
-                    if (epic.equals(desciptionTask)) {
-                        printEpicGet(epic);
-                    }
-                }
-                for (Subtask subtask : manager.allSubtasks()) {
-                    if (subtask.equals(desciptionTask)) {
-                        printSubtaskGet(subtask);
-                    }
-                }
-            }else {
-                System.out.println("Неверно!");
-            }
+            String userNum = scanner.next();
+            findTasksName(userNum,mapaTasks);
         } else if (userChoose == 2) {
-            System.out.println("Введите ID задачи которой вы хотите найти: ");
-            int userIdSearch = scanner.nextInt();
-            if (manager.getTask(userIdSearch) != null) {
-                for (Task task : manager.allTasks()) {
-                    if (userIdSearch == task.getId()) {
-                        printTaskGet(task);
-                    }
-                }
-            }else if (manager.getEpic(userIdSearch) != null){
-                for (Epic epic : manager.allEpics()) {
-                    if (userIdSearch == epic.getId()) {
-                        printEpicGet(epic);
-                    }
-                }
-            }else if (manager.getSubtask(userIdSearch) != null){
-                for (Subtask subtask : manager.allSubtasks()) {
-                    if (userIdSearch == subtask.getId()) {
-                        printSubtaskGet(subtask);
-                    }
-                }
-            }else {
-                System.out.println("Такой задачи нету! ");
-            }
+            System.out.println("Введите ID задачи: ");
+            int userNum = scanner.nextInt();
+            findTasksId(userNum,mapaTasks);
         }else {
             System.out.println("Неверно!");
         }
