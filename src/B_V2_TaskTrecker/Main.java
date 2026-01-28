@@ -74,7 +74,7 @@ public class Main {
             if (userCommand == 1){
                 createTask(scanner,manager);
             } else if (userCommand == 2) {
-                findTasks(scanner,manager);
+                System.out.println(printGet(findTasks(scanner,manager)));
             } else if (userCommand == 3) {
                 deletedTasks(scanner,manager);
             } else if (userCommand == 4) {
@@ -87,8 +87,6 @@ public class Main {
                 break;
             }
         }
-
-// мне нужно чтобы printGet у меня нормально выводился в мейне
 
     }
 
@@ -109,44 +107,43 @@ public class Main {
         System.out.println("3-Subtask");
     }
 
-    public static Task printGet(Task task){
-        return task;
+    public static String printGet(Task task){
+        return "Имя: " + task.getName() + ". Описание: " + task.getDescriptions() + ". Статус: " + task.getStatus() + ". Id: " + task.getId();
     }
 
-    public static Task printGet(Epic epic){
-        return epic;
+    public static String printGet(Epic epic){
+        return "Имя: " + epic.getName() + ". Описание: " + epic.getDescriptions() + ". Статус: " + epic.getStatus() + ". Id: " + epic.getId() + ". Id subtask: " + epic.getSubtaskIds();
     }
 
-    public static Task printGet(Subtask subtask){
-        return subtask;
+    public static String printGet(Subtask subtask){
+        return "Имя: " + subtask.getName() + ". Описание: " + subtask.getDescriptions() + ". Статус: " + subtask.getStatus() + ". Id: " + subtask.getId() + ". Id epic: " + subtask.getEpicId();
     }
 
     public static Task findTasksName(String nameOrDescption,HashMap<Integer,Task> mapaTasks){
+        Task task11 = new Task(null,null,null);
             if (nameOrDescption == null){
-                System.out.println("Нету значения");
-                return null;
+                return task11;
             }
             for (Task task : mapaTasks.values()){
                 if (task.getName().equals(nameOrDescption)){
-                    return printGet(task);
+                    return (task);
                 }
             }
             for (Task task : mapaTasks.values()){
                 if (task.getDescriptions().equals(nameOrDescption)){
-                    return printGet(task);
+                    return (task);
                 }
             }
-            System.out.println("Неверно!");
-            return null;
+            return task11;
     }
 
     static Task findTasksId(int userNum,HashMap<Integer,Task> mapaTasks){
         if (mapaTasks.containsKey(userNum)){
-            return printGet(mapaTasks.get(userNum));
+            return (mapaTasks.get(userNum));
         }else {
-            System.out.println("Такой задачи нету");
+            Task task11 = new Task(null,null,null);
+            return task11;
         }
-        return null;
     }
 
     public static void createTask(Scanner scanner,InMemoryTaskManager manager){
@@ -178,11 +175,10 @@ public class Main {
             System.out.println("Подзадача успешно создана: " + name);
         }else {
             System.out.println("Такого типа задач нету!");
-            return;
         }
     }
 
-    public static void findTasks(Scanner scanner,InMemoryTaskManager manager){
+    public static Task findTasks(Scanner scanner,InMemoryTaskManager manager){
         HashMap<Integer,Task> mapaTasks = new HashMap<>();
         for (Task task : manager.allTasks()){
             mapaTasks.put(task.getId(), task);
@@ -197,14 +193,17 @@ public class Main {
         System.out.println("2.- Найти задачу по ID");
         int userChoose = scanner.nextInt();
         if (userChoose == 1){
+            System.out.println("Введи имя или описание: ");
             String userNum = scanner.next();
-            findTasksName(userNum,mapaTasks);
+            return findTasksName(userNum,mapaTasks);
         } else if (userChoose == 2) {
             System.out.println("Введите ID задачи: ");
             int userNum = scanner.nextInt();
-            findTasksId(userNum,mapaTasks);
+            return findTasksId(userNum,mapaTasks);
         }else {
+            Task task11 = new Task(null,null,null);
             System.out.println("Неверно!");
+            return task11;
         }
     }
 
