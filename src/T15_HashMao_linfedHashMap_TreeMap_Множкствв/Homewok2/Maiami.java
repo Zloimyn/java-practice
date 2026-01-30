@@ -38,19 +38,22 @@ public class Maiami {
     }
 
     private void printStatistics() {
-        int min = 0;
+        int min = 1;
         int max = 0;
         int allZakas = 0;
-        for (int i = 0; i < orders.size(); i++) {
-            allZakas += orders.get(i);
-            if (orders.get(i) > max){
-                max = orders.get(i);
-            } else if (orders.get(i) < min) {
-                min = orders.get(i);
+        for (Map.Entry<String,Integer> order : orders.entrySet()) {
+            allZakas += order.getValue();
+            if (order.getValue() > max){
+                max = order.getValue();
+            } else if (order.getValue() < min) {
+                min = order.getValue();
             }
+            System.out.println("Заказов от " + order.getKey() + " : " + order.getValue());
         }
         System.out.println("Всего заказов: " + allZakas);
-        System.out.println("Заказов от: "  + " ");
+        System.out.println("Самый большой заказ: " + max);
+        System.out.println("Самый маленький заказ: " + min);
+
         // Выведите собранную статистику в консоль и посчитайте общее количество заказов.
         //
         // Формат для вывода данных в консоль:

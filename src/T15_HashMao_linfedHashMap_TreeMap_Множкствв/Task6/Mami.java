@@ -22,6 +22,7 @@ public class Mami {
     public static Map<String, Integer> assignSeats(List<String> passengerNames) {
         // Тут нужно написать код, который будет распределять места в самолёте ✈️
         HashMap<String,Integer> seats = new HashMap<>();
+
         for (int i = 0; i < passengerNames.size(); i++) {
             seats.put(passengerNames.get(i),i+1);
         }
