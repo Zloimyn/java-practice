@@ -20,17 +20,20 @@ public class Pipi {
     }
 
     private static Long findUser(Long userId) {
-
-        return null;
+        User user = new User(userId,"123");
+        return users.get(user);
     }
 
     @Override
-    public boolean equals(Long userId){
-        if (users.containsKey(userId))
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null) return false;
+        User user = (User) o;
+        return ((User) o).id == user.id;
     }
 
     @Override
     public int hashCode(){
-
+        return users.hashCode();
     }
 }
