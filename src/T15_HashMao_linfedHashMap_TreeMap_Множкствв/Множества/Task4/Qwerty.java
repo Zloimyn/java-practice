@@ -1,4 +1,4 @@
-package T15_HashMao_linfedHashMap_TreeMap_Множкствв.Множества.Ta4;
+package T15_HashMao_linfedHashMap_TreeMap_Множкствв.Множества.Task4;
 
 
 public class Qwerty implements Comparable<Qwerty> {

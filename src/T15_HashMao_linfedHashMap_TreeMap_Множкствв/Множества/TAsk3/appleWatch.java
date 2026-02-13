@@ -1,4 +1,4 @@
-package T15_HashMao_linfedHashMap_TreeMap_Множкствв.Множества.TAs3;
+package T15_HashMao_linfedHashMap_TreeMap_Множкствв.Множества.TAsk3;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
