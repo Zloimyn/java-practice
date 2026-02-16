@@ -373,21 +373,18 @@ public class Main {
         System.out.println("4-Все");
         int userCom = scanner.nextInt();
         if (userCom == 1){
-            manager.allTasks();
+            System.out.println(manager.allTasks());
         } else if (userCom == 2) {
-            manager.allEpics();
+            System.out.println(manager.allEpics());
         } else if (userCom == 3) {
-            manager.allSubtasks();
+            System.out.println(manager.allSubtasks());
         } else if (userCom == 4) {
             System.out.print("Tasks: ");
-            manager.allTasks();
-            System.out.println(" ");
+            System.out.println(manager.allTasks());
             System.out.print("Epics: ");
-            manager.allEpics();
-            System.out.println(" ");
+            System.out.println(manager.allEpics());
             System.out.print("subtasks: ");
-            manager.allSubtasks();
-            System.out.println(" ");
+            System.out.println(manager.allSubtasks());
         }
     }
 
