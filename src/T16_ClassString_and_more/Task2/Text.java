@@ -9,6 +9,8 @@ public class Text {
         }else {
             isCapsLock = true;
         }
+        // так или так
+        isCapsLock = !isCapsLock;
     }
 
     public void print(String str){
@@ -19,5 +21,7 @@ public class Text {
             str = str.toLowerCase();
             System.out.println(str);
         }
+        // так или так
+        System.out.println(isCapsLock ?  str.toUpperCase() : str);
     }
 }
