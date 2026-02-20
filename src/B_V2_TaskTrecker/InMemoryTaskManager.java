@@ -222,4 +222,28 @@ public class InMemoryTaskManager implements TaskManager {
         return managerId;
     }
 
+    public void remove(int id){
+
+
+    }
+
+    public List<Task> getHistory(){
+        ArrayList<Task> allTasks = new ArrayList<>();
+
+        return allTasks;
+    }
+
+    public void add(Task task){
+
+
+    }
+
+    public void removeNode(Node node){
+
+    }
+
+//    public Node linkedLast(Task task){
+//        return task;
+//    }
+
 }

@@ -23,6 +23,12 @@ public interface TaskManager {
 
     int getSize();
 
+    List<Task> getHistory();
+    void add(Task task);
+    void remove(int id);
+    void removeNode(Node node);
+//    Node linkedLast(Task task);
+
     void deleteIdTask(int deleteId);
     void deleteIdEpic(int deleteId);
     void deleteIdSubtask(int deleteId);
