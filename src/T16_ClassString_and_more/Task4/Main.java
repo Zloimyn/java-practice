@@ -10,7 +10,7 @@ public class Main {
         String name4 = "other faesa";
         String other = "other";
         System.out.println(startWith(name1,other));
-        System.out.println(endsWith(name2,other));
+        System.out.println(endsWith(name1,other));
     }
     public static boolean startWith(String initial, String other){
         if (initial.indexOf(other) == -1){
@@ -23,6 +23,7 @@ public class Main {
         if (initial.indexOf(other) == -1){
             return false;
         }
-        return initial.lastIndexOf(other) == ;
+        int newLenght = initial.length() - other.length();
+        return initial.lastIndexOf(other) == newLenght;
     }
 }
