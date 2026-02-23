@@ -1,10 +1,9 @@
 package T16_ClassString_and_more.Task4;
 
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        String name1 = "faesa other";
+        String name1 = "faesa other ashdasdvhasvdhs";
         String name2 = "faesa other adda";
         String name3 = "faesa";
         String name4 = "other faesa";
