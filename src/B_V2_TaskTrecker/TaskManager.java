@@ -1,9 +1,27 @@
 package B_V2_TaskTrecker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface TaskManager {
+
+     class Node<T>{
+        public T data;
+        Node prev;
+        Node next;
+        Node head;
+        Node tail;
+         public Node(T data){
+             this.data = data;
+             this.next = null;
+             this.prev = null;
+         }
+    }
+
+    HashMap<Integer, Node> historyMapa = new HashMap<>();
+    Node head = null;
+    Node tail = null;
 
     void createTask(Task task);
     void createEpic(Epic epic);
@@ -24,9 +42,9 @@ public interface TaskManager {
     int getSize();
 
     List<Task> getHistory();
-    void add(Task task);
-    void remove(int id);
-    void removeNode(Node node);
+//    void add(Task task);
+//    void remove(int id);
+//    void removeNode(Node node);
 //    Node linkedLast(Task task);
 
     void deleteIdTask(int deleteId);

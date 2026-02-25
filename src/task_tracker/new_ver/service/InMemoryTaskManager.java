@@ -1,69 +1,76 @@
-package B_V2_TaskTrecker;
+package task_tracker.new_ver.service;
 
+import task_tracker.new_ver.model.Epic;
+import task_tracker.new_ver.model.Status;
+import task_tracker.new_ver.model.Subtask;
+import task_tracker.new_ver.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
-    private int managerId = 1;
+    private int taskId = 1;
     InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
 
-    private HashMap<Integer, Task> tasks = new HashMap<>();
-    private HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    private HashMap<Integer, Epic> epics = new HashMap<>();
+    private final HashMap<Integer, Task> tasks = new HashMap<>();
+    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
+    private final HashMap<Integer, Epic> epics = new HashMap<>();
 
     public void createTask(Task task){
-        task.setId(managerId);
-        tasks.put(managerId,task);
-        managerId++;
+        task.setId(taskId);
+        tasks.put(taskId,task);
+        taskId++;
     }
 
     public void createEpic(Epic epic){
-        epic.setId(managerId);
-        epics.put(managerId,epic);
-        managerId++;
+        epic.setId(taskId);
+        epics.put(taskId,epic);
+        taskId++;
     }
 
     public void createSubtask(Subtask subtask){
-        subtask.setId(managerId);
-        subtasks.put(managerId,subtask);
-        managerId++;
-
         Epic epic = epics.get(subtask.getEpicId());
         if (epic != null){
+            subtask.setId(taskId);
+            subtasks.put(taskId,subtask);
+
             epic.addSubtaskId(subtask.getId());
+            updateEpicStatus(subtask.getEpicId());
+
+            taskId++;
         }
 
-        updateEpicStatus(subtask.getEpicId());
     }
 
 
-    public void updateTask(Task task){
-        tasks.put(task.getId(),task);
+    public void updateTask(Task updatedTask){
+        int id = updatedTask.getId();
+        if (tasks.containsKey(id)){
+            tasks.put(id,updatedTask);
+        }
     }
 
-    public void updateEpic(Epic epicUpdate){
-        int id = epicUpdate.getId();
-
+    public void updateEpic(Epic updatedEpic){
+        int id = updatedEpic.getId();
         if (epics.containsKey(id)) {
-            epics.put(id, epicUpdate);
+            epics.put(id, updatedEpic);
             updateEpicStatus(id);
         }
     }
 
     public void updateSubtask(Subtask updatedSubtask){
         int id = updatedSubtask.getId();
-
         if (subtasks.containsKey(id)) {
             subtasks.put(id, updatedSubtask);
             updateEpicStatus(id);
         }
     }
 
-    public ArrayList<Task> allTasks(){
+
+    public List<Task> allTasks(){
         ArrayList<Task> result = new ArrayList<>();
-        for (int i = 1; i < managerId; i++) {
+        for (int i = 1; i < taskId; i++) {
             if (tasks.get(i) != null){
                 result.add(tasks.get(i));
             }
@@ -71,9 +78,9 @@ public class InMemoryTaskManager implements TaskManager {
         return result;
     }
 
-    public ArrayList<Subtask> allSubtasks(){
+    public List<Subtask> allSubtasks(){
         ArrayList<Subtask> result = new ArrayList<>();
-        for (int i = 1; i < managerId; i++) {
+        for (int i = 1; i < taskId; i++) {
             if (subtasks.get(i) != null){
                 result.add(subtasks.get(i));
             }
@@ -81,9 +88,9 @@ public class InMemoryTaskManager implements TaskManager {
         return result;
     }
 
-    public ArrayList<Epic> allEpics(){
+    public List<Epic> allEpics(){
         ArrayList<Epic> result = new ArrayList<>();
-        for (int i = 1; i < managerId; i++) {
+        for (int i = 1; i < taskId; i++) {
             if (epics.get(i) != null){
                 result.add(epics.get(i));
             }
@@ -91,47 +98,20 @@ public class InMemoryTaskManager implements TaskManager {
         return result;
     }
 
-    public ArrayList<Task> getTask(int userId){
-        ArrayList<Task> result = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(userId) != null){
-                result.add(tasks.get(userId));
-                historyManager.add(tasks.get(userId));
-                return result;
-            }else {
-            }
-        }
-        return result;
+    public Task getTask(int userId){
+        return tasks.get(userId);
     }
 
-    public ArrayList<Subtask> getSubtask(int userId){
-        ArrayList<Subtask> result = new ArrayList<>();
-        for (int i = 0; i < subtasks.size(); i++) {
-            if (subtasks.get(userId) != null){
-                result.add(subtasks.get(userId));
-                historyManager.add(subtasks.get(userId));
-                return result;
-            }else {
-            }
-        }
-        return result;
+    public Subtask getSubtask(int userId){
+        return subtasks.get(userId);
     }
 
-    public ArrayList<Epic> getEpic(int userId){
-        ArrayList<Epic> result = new ArrayList<>();
-        for (int i = 0; i < epics.size(); i++) {
-            if (epics.get(userId) != null){
-                result.add(epics.get(userId));
-                historyManager.add(epics.get(userId));
-                return result;
-            }else {
-            }
-        }
-        return result;
+    public Epic getEpic(int userId){
+        return epics.get(userId);
     }
 
-    public void deleteIdTask(int deleteId){
-        if (managerId != deleteId){
+    public void deleteTask(int deleteId){
+        if (taskId != deleteId){
             System.out.println("Такой задачи не существует");
         }else {
             System.out.println("Задача была удалена: ");
@@ -140,8 +120,8 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    public void deleteIdEpic(int deleteId){
-        if (managerId != deleteId){
+    public void deleteEpic(int deleteId){
+        if (taskId != deleteId){
             System.out.println("Такой задачи не существует");
         }else {
             System.out.println("Задача была удалена: ");
@@ -150,8 +130,8 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    public void deleteIdSubtask(int deleteId){
-        if (managerId != deleteId){
+    public void deleteSubtask(int deleteId){
+        if (taskId != deleteId){
             System.out.println("Такой задачи не существует");
         }else {
             System.out.println("Задача была удалена: ");
@@ -160,17 +140,17 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    public void deleteAllTask(){
+    public void deleteAllTasks(){
         System.out.println("Все задачи были удалены: ");
         tasks.clear();
     }
 
-    public void deleteAllEpic() {
+    public void deleteAllEpics() {
         System.out.println("Все задачи были удалены: ");
         epics.clear();
     }
 
-    public void deleteAllSubtask(){
+    public void deleteAllSubtasks(){
         System.out.println("Все задачи были удалены: ");
         subtasks.clear();
     }
@@ -220,34 +200,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     public int getSize(){
-        return managerId;
+        return taskId;
     }
-
-    public void remove(int id){
-
-
-    }
-
-    public List<Task> getHistory(){
-        ArrayList<Task> allTasks = new ArrayList<>();
-
-        return allTasks;
-    }
-
-    public void add(Task task){
-
-
-    }
-
-    public void removeNode(Node node){
-
-    }
-
-//    public Node linkedLast(Task task){
-//        Node oldTail = tail;
-//        tail = new Node(task);
-//        tail.prev = oldTail;
-//        oldTail.next = tail;
-//    }
 
 }
