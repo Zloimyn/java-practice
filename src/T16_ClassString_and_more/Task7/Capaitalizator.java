@@ -1,7 +1,5 @@
 package T16_ClassString_and_more.Task7;
 
-import java.util.Locale;
-
 public class Capaitalizator {
     public static void main(String[] args) {
         Capaitalizator check = new Capaitalizator();
@@ -9,6 +7,7 @@ public class Capaitalizator {
     }
 
     public static String capitalize(String str){
-        return str.toLowerCase(Locale.ROOT);
+        String ia = str.substring(0,1).toUpperCase();
+        return ia + str.substring(1);
     }
 }
