@@ -164,144 +164,159 @@ public class Main {
         }
     }
 
+    public static void createdTasks(Task task,InMemoryTaskManager manager){
+        manager.createTask(task);
+        System.out.println("Задача обновлена: " + manager.getTask(task.getId()).getId());
+    }
+
+    public static void createdTasks(Epic epic,InMemoryTaskManager manager){
+        manager.createTask(epic);
+        System.out.println("Задача обновлена: " + manager.getTask(epic.getId()).getId());
+    }
+
+    public static void createdTasks(Subtask subtask,InMemoryTaskManager manager){
+        manager.createTask(subtask);
+        System.out.println("Задача обновлена: " + manager.getTask(subtask.getId()).getId());
+    }
+
     public static void updateTasks(Scanner scanner, InMemoryTaskManager manager) {
         System.out.println("Введите тип задачи для обновления: ");
         printListChoose();
         int userTypeTask = scanner.nextInt();
 
+        System.out.println("Выберете ID задачи для обновления: ");
+        int userChooseTask = scanner.nextInt();
+
         Status statusUser = null;
         String descriptions;
         String name;
         System.out.println("Введите название обновленной задачи: ");
-        name = scanner.next();
+        name = scanner.nextLine();
 
         System.out.println("Введите описание обновленной задачи: ");
-        descriptions = scanner.next();
+        descriptions = scanner.nextLine();
 
         System.out.println("Введите статус обновленной задачи:");
-        System.out.println("1 - NEW" +
-                " 2 - IN_PROGRESS" +
-                " 3 - DONE");
-        int choseUse = scanner.nextInt();
+        System.out.println("1 - NEW\n" +
+                "2 - IN_PROGRESS\n" +
+                "3 - DONE");
+        String choseUse = scanner.nextLine();
 
-        int temp = 1;
+//        System.out.println("Обновить подзадачу для эпика?");
+//        System.out.println("1-Да\n" + "2-Нет ");
+//        int epicZadacha = scanner.nextInt();
+//        if (epicZadacha == 1){
+//            if (manager.getEpic(userChooseTask) != null){
+//                if (name.isEmpty()){
+//                    name = manager.getSubtask(manager.getEpic(userChooseTask).getSubtaskIds()).getName();
+//                } else if (descriptions.isEmpty()) {
+//                    descriptions = manager.getSubtask(manager.getEpic(userChooseTask).getSubtaskIds()).getDescriptions();
+//                }
+//                statusUser = manager.getEpic(userChooseTask).getStatus();
+//            }
+//            Subtask subtask = new Subtask(name,descriptions,manager.getEpic(userChooseTask).getId());
+//            createdTasks(subtask,manager);
+//        }
+
+        //Сделать это новое меню сверху в мейне как отделбный метод только для обновлений подзадач
+
+
         if (userTypeTask == 1) {
-            System.out.println("Выберете id задачи для обновления: ");
-            int userChooseTask = scanner.nextInt();
-
             if (manager.getTask(userChooseTask) != null){
-                if (name == null){
+                if (name.isEmpty()){
                     name = manager.getTask(userChooseTask).getName();
-                } else if (descriptions == null) {
+                } else if (descriptions.isEmpty()) {
                     descriptions = manager.getTask(userChooseTask).getDescriptions();
                 }
                 statusUser = manager.getTask(userChooseTask).getStatus();
             } else  {
                 System.out.println("Такой задачи нету");
+                return;
             }
 
-            if (choseUse == 1) {
+            if (choseUse.equals("1")) {
                 statusUser = Status.NEW;
                 Task task1 = new Task(name, descriptions, statusUser);
-                manager.createTask(task1);
-                System.out.println("Задача обновлена: " + task1);
+                createdTasks(task1,manager);
 
-            } else if (choseUse == 2) {
+            } else if (choseUse.equals("2")) {
                 statusUser = Status.IN_PROGRESS;
                 Task task2 = new Task(name, descriptions, statusUser);
-                manager.createTask(task2);
-                System.out.println("Задача обновлена: " + task2);
+                createdTasks(task2,manager);
 
-            } else if (choseUse == 3) {
+            } else if (choseUse.equals("3")) {
                 statusUser = Status.DONE;
                 Task task3 = new Task(name, descriptions, statusUser);
-                manager.createTask(task3);
-                System.out.println("Задача обновлена: " + task3);
+                createdTasks(task3,manager);
 
             } else {
                 System.out.println("Такого статуса нету!");
             }
         } else if (userTypeTask == 2) {
-            HashMap<Integer, String> idEpics = new HashMap<>();
-            System.out.println("Выберете Epic для обновления: ");
-            int userChooseTask = scanner.nextInt();
-            for (Epic epic : manager.allEpics()) {
-                System.out.print(temp + ".-");
-                System.out.println(epic.getName());
-                idEpics.put(epic.getId(), epic.getName());
-                temp++;
-
-            }
             if (manager.getEpic(userChooseTask) != null){
-                if (name == null){
+                if (name.isEmpty()){
                     name = manager.getEpic(userChooseTask).getName();
-                } else if (descriptions == null) {
+                } else if (descriptions.isEmpty()) {
                     descriptions = manager.getEpic(userChooseTask).getDescriptions();
                 }
                 statusUser = manager.getEpic(userChooseTask).getStatus();
+            }else {
+                System.out.println("Такой задачи нету");
+                return;
             }
 
-            if (choseUse == 1) {
+            if (choseUse.equals("1")) {
                 statusUser = Status.NEW;
                 Epic epic = new Epic(name, descriptions, statusUser);
-                manager.createEpic(epic);
-                System.out.println("Задача обновлена: " + epic);
+                Subtask subtask = new Subtask(manager.getSubtask(manager.getEpic(userChooseTask).getSubtaskIds()).getName(), descSub, statusUser, epic.getId());
+                createdTasks(epic,manager);
+                createdTasks(subtask,manager);
 
-            } else if (choseUse == 2) {
+            } else if (choseUse.equals("2")) {
                 statusUser = Status.IN_PROGRESS;
                 Epic epic = new Epic(name, descriptions, statusUser);
-                manager.createEpic(epic);
-                System.out.println("Задача обновлена: " + epic);
+                Subtask subtask = new Subtask(nameSub, descSub, statusUser, epic.getId());
+                createdTasks(epic,manager);
+                createdTasks(subtask,manager);
 
-            } else if (choseUse == 3) {
+            } else if (choseUse.equals("3")) {
                 statusUser = Status.DONE;
                 Epic epic = new Epic(name, descriptions, statusUser);
-                manager.createEpic(epic);
-                System.out.println("Задача обновлена: " + epic);
+                Subtask subtask = new Subtask(nameSub, descSub, statusUser, epic.getId());
+                createdTasks(epic,manager);
+                createdTasks(subtask,manager);
 
             } else {
                 System.out.println("Такого статуса нету!");
             }
         } else if (userTypeTask == 3) {
-            HashMap<Integer, String> idSubtasks = new HashMap<>();
-            System.out.println("Выберете Subtask для обновления: ");
-            int userChooseTask = scanner.nextInt();
             int epicId = 0;
-            for (Subtask subtask : manager.allSubtasks()) {
-                System.out.print(temp + ".-");
-                System.out.println(subtask.getName());
-                idSubtasks.put(subtask.getId(), subtask.getName());
-                temp++;
-                epicId = subtask.getEpicId();
-
-            }
-
             if (manager.getEpic(userChooseTask) != null){
-                if (name == null){
+                if (name.isEmpty()){
                     name = manager.getSubtask(userChooseTask).getName();
-                } else if (descriptions == null) {
+                } else if (descriptions.isEmpty()) {
                     descriptions = manager.getSubtask(userChooseTask).getDescriptions();
                 }
                 statusUser = manager.getEpic(userChooseTask).getStatus();
+            }else {
+                System.out.println("Такой задачи нету");
+                return;
             }
 
-            if (choseUse == 1) {
+            if (choseUse.equals("1")) {
                 statusUser = Status.NEW;
                 Subtask subtask = new Subtask(name, descriptions, statusUser, epicId);
-                manager.createSubtask(subtask);
-                System.out.println("Задача обновлена: " + subtask);
+                createdTasks(subtask,manager);
 
-            } else if (choseUse == 2) {
+            } else if (choseUse.equals("2")) {
                 statusUser = Status.IN_PROGRESS;
                 Subtask subtask = new Subtask(name, descriptions, statusUser, epicId);
-                manager.createSubtask(subtask);
-                System.out.println("Задача обновлена: " + subtask);
+                createdTasks(subtask,manager);
 
-            } else if (choseUse == 3) {
+            } else if (choseUse.equals("3")) {
                 statusUser = Status.DONE;
                 Subtask subtask = new Subtask(name, descriptions, statusUser, epicId);
-                manager.createSubtask(subtask);
-                System.out.println("Задача обновлена: " + subtask);
+                createdTasks(subtask,manager);
 
             } else {
                 System.out.println("Такого статуса нету!");
