@@ -14,8 +14,11 @@ public class Main {
     }
 
     public String fixPoem(String[] poem) {
-        StringBuilder stringBuilder = new StringBuilder(poem);
-        return  // допишите код
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String line: poem){
+            stringBuilder.append(line.trim());
+        }
+        return String.valueOf(stringBuilder);  // допишите код
     }
 
     public static void main(String[] args) {
