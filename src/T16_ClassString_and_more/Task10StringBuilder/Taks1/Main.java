@@ -16,9 +16,9 @@ public class Main {
     public String fixPoem(String[] poem) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String line: poem){
-            stringBuilder.append(line.trim());
+            stringBuilder.append(line.trim() + "\n");
         }
-        return String.valueOf(stringBuilder);  // допишите код
+        return  stringBuilder.toString();  // допишите код
     }
 
     public static void main(String[] args) {
