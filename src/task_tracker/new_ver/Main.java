@@ -341,19 +341,19 @@ public class Main {
         int choseUse = scanner.nextInt();
         Status status = Status.NEW;
 
-        if (choseUse == 1){
-            Subtask subtask = new Subtask(name,desc);
-        } else if (choseUse == 2) {
-            status = Status.IN_PROGRESS;
-            Subtask subtask = new Subtask(name,desc);
-
-        } else if (choseUse == 3) {
-            status = Status.DONE;
-            Subtask subtask = new Subtask(name,desc);
-
-        }else {
-            System.out.println("Такого статуса нету");
-        }
+//        if (choseUse == 1){
+//            Subtask subtask = new Subtask(name, desc, , status);
+//        } else if (choseUse == 2) {
+//            status = Status.IN_PROGRESS;
+//            Subtask subtask = new Subtask(name, desc, , status);
+//
+//        } else if (choseUse == 3) {
+//            status = Status.DONE;
+//            Subtask subtask = new Subtask(name, desc, , status);
+//
+//        }else {
+//            System.out.println("Такого статуса нету");
+//        }
     }
 
     public static void clearListTasks(Scanner scanner, InMemoryTaskManager manager) {
