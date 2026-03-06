@@ -11,7 +11,7 @@ public class Homework {
         int count = 0;
         while (stringBuilder.indexOf(substring) != -1){
             count++;
-            stringBuilder.deleteCharAt(substring.length());
+            stringBuilder.delete(0, stringBuilder.indexOf(substring) + substring.length());
         }
         return count;
     }
