@@ -268,24 +268,23 @@ public class Main {
             if (choseUse.equals("1")) {
                 statusUser = Status.NEW;
                 Epic epic = new Epic(name, descriptions, statusUser);
-//                Subtask subtask = new Subtask(manager.getSubtask(manager.getEpic(userChooseTask).getSubtaskIds()).getName(), descSub, statusUser, epic.getId());
-//                createdTasks(epic,manager);
-//                createdTasks(subtask,manager);
-                // надо через for проходится у getSubtaskIds потом сверять тот ли айди или нет и уже по нему вытаскивать name,descriptions
+                Subtask subtask = new Subtask(manager.getSubtask(manager.getEpic(userChooseTask).getSubtaskIds()).getName(), descSub, statusUser, epic.getId());
+                createdTasks(epic,manager);
+                createdTasks(subtask,manager);
 
             } else if (choseUse.equals("2")) {
                 statusUser = Status.IN_PROGRESS;
                 Epic epic = new Epic(name, descriptions, statusUser);
-//                Subtask subtask = new Subtask(nameSub, descSub, statusUser, epic.getId());
-//                createdTasks(epic,manager);
-//                createdTasks(subtask,manager);
+                Subtask subtask = new Subtask(nameSub, descSub, statusUser, epic.getId());
+                createdTasks(epic,manager);
+                createdTasks(subtask,manager);
 
             } else if (choseUse.equals("3")) {
                 statusUser = Status.DONE;
                 Epic epic = new Epic(name, descriptions, statusUser);
-//                Subtask subtask = new Subtask(nameSub, descSub, statusUser, epic.getId());
-//                createdTasks(epic,manager);
-//                createdTasks(subtask,manager);
+                Subtask subtask = new Subtask(nameSub, descSub, statusUser, epic.getId());
+                createdTasks(epic,manager);
+                createdTasks(subtask,manager);
 
             } else {
                 System.out.println("Такого статуса нету!");
