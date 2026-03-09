@@ -12,16 +12,16 @@ public class Mami {
         System.out.println(isPalidromeLine(name5));
     }
     public static Boolean isPalidromeLine(String name){
-        String emae = name.replace(" ","");
+        String emae = name.replace(" ","").toLowerCase();
         StringBuilder stringBuilder1 = new StringBuilder(emae);
 
-        stringBuilder1.reverse();
+        return stringBuilder1.reverse().toString().equals(emae);
 
-        if (stringBuilder1.toString().equals(emae)){
-            return true;
-        }else {
-            return false;
-        }
+//        if (stringBuilder1.toString().equals(emae)){
+//            return true;
+//        }else {
+//            return false;
+//        }
 
 //        for (int i = 0; i < emae.length(); i++) {
 //            if (stringBuilder1.charAt(i) == stringBuilder.charAt(i)){
