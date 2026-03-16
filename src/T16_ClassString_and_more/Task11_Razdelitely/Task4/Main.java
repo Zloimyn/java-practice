@@ -1,14 +1,13 @@
 package T16_ClassString_and_more.Task11_Razdelitely.Task4;
 
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
-        String[] students = {"Вероника Чехова физика — Безупречно", "Анна Строкова математика — Потрясающе", "Иван Петров геометрия — Безупречно"};
+        String[] students = {"Вероника Чехова физика — Безупречно Анна Строкова математика — Потрясающе Иван Петров геометрия — Безупречно"};
+
 
         serializeGrades(students);
     }
-    private String gradeStringToInt(String grade) {
+    private static String gradeStringToInt(String grade) {
         switch (grade) {
             case "Безупречно": {
                 return "5";
@@ -28,13 +27,15 @@ public class Main {
     }
 
     public static String serializeGrades(String[] grades) {
-        StringBuilder stringBuilder = new StringBuilder();
         String[] newMassiv = new String[grades.length];
+        String join = "";
         for (String students : grades){
-            String[] newMassiv = students.split(" ");
-            newMassiv[3] = "";
+            newMassiv = students.split(" ");
+            newMassiv[4] = gradeStringToInt(newMassiv[4]);
+
+            join = String.join(",",newMassiv[0].toLowerCase(),newMassiv[1].toLowerCase(),newMassiv[2].toLowerCase(),newMassiv[4].toLowerCase());
         }
-        System.out.println(newMassiv);
-        return stringBuilder.toString();
+        System.out.println(join);
+        return join;
     }
 }
