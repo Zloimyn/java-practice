@@ -1,9 +1,10 @@
 package T16_ClassString_and_more.Task11_Razdelitely.Task4;
 
+import static java.lang.String.join;
+
 public class Main {
     public static void main(String[] args) {
-        String[] students = {"Вероника Чехова физика — Безупречно Анна Строкова математика — Потрясающе Иван Петров геометрия — Безупречно"};
-
+        String[] students = {"Вероника Чехова физика — Безупречно", "Анна Строкова математика — Потрясающе", "Иван Петров геометрия — Безупречно"};
 
         serializeGrades(students);
     }
@@ -29,13 +30,31 @@ public class Main {
     public static String serializeGrades(String[] grades) {
         String[] newMassiv = new String[grades.length];
         String join = "";
-        for (String students : grades){
-            newMassiv = students.split(" ");
+        String temp = "";
+        for (int i = 0; i < grades.length; i++) {
+            newMassiv = grades[i].split(" ");
             newMassiv[4] = gradeStringToInt(newMassiv[4]);
 
-            join = String.join(",",newMassiv[0].toLowerCase(),newMassiv[1].toLowerCase(),newMassiv[2].toLowerCase(),newMassiv[4].toLowerCase());
+
+            join = join(",",newMassiv[0].toLowerCase(),newMassiv[1].toLowerCase(),newMassiv[2].toLowerCase(),newMassiv[4].toLowerCase());
+            grades[i] = join;
         }
-        System.out.println(join);
-        return join;
+
+//        for (String students : grades){
+//            newMassiv = students.split(" ");
+//            newMassiv[4] = gradeStringToInt(newMassiv[4]);
+//
+//            join += String.join(",",newMassiv[0].toLowerCase(),newMassiv[1].toLowerCase(),newMassiv[2].toLowerCase(),newMassiv[4].toLowerCase());
+//            temp += join;
+//            if (temp == join){
+//                join += ";";
+//            }else {
+//                join
+//            }
+//
+//        }
+
+        System.out.println(join(";",grades));
+        return join(";",grades);
     }
 }
