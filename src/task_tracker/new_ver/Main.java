@@ -6,7 +6,9 @@ import task_tracker.new_ver.model.Status;
 import task_tracker.new_ver.model.Subtask;
 import task_tracker.new_ver.model.Task;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -35,6 +37,8 @@ public class Main {
                 printListTasks(scanner, manager);
             } else if (userCommand == 0) {
                 break;
+            } else if (userCommand == 9) {
+                updateTasks1(scanner,manager);
             }
         }
 
@@ -50,6 +54,7 @@ public class Main {
         System.out.println("6- Очистить список задач");
         System.out.println("7- Вывести список задач");
         System.out.println("0- Выход из программы");
+        System.out.println("9- Обновление");
     }
 
     public static void printListChoose() {
@@ -194,9 +199,9 @@ public class Main {
         if (userTypeTask == 1) {
             if (manager.getTask(userChooseTask) != null) {
                 if (name.isEmpty()) {
-                    name = manager.getTask(userChooseTask).getName();
+                    name = null;
                 } else if (descriptions.isEmpty()) {
-                    descriptions = manager.getTask(userChooseTask).getDescriptions();
+                    descriptions = null;
                 }
                 statusUser = manager.getTask(userChooseTask).getStatus();
             } else {
@@ -225,9 +230,9 @@ public class Main {
         } else if (userTypeTask == 2) {
             if (manager.getEpic(userChooseTask) != null) {
                 if (name.isEmpty()) {
-                    name = manager.getEpic(userChooseTask).getName();
+                    name = null;
                 } else if (descriptions.isEmpty()) {
-                    descriptions = manager.getEpic(userChooseTask).getDescriptions();
+                    descriptions = null;
                 }
                 statusUser = manager.getEpic(userChooseTask).getStatus();
             } else {
@@ -263,9 +268,9 @@ public class Main {
             int epicId = 0;
             if (manager.getEpic(userChooseTask) != null) {
                 if (name.isEmpty()) {
-                    name = manager.getSubtask(userChooseTask).getName();
+                    name = null;
                 } else if (descriptions.isEmpty()) {
-                    descriptions = manager.getSubtask(userChooseTask).getDescriptions();
+                    descriptions = null;
                 }
                 statusUser = manager.getEpic(userChooseTask).getStatus();
             } else {
@@ -390,30 +395,66 @@ public class Main {
 
     }
 
-    public static void actionsOnTask(int idChooseTask, String newName, String newDescriptions, Status newStatus, InMemoryTaskManager manager, String choseUse) {
-        if (manager.getTask(idChooseTask) != null) {
-            if (newName == null || newDescriptions == null || newStatus == null){
-                return;
+    public static void actionsOnTask(int idChooseTask, String newName, String newDescriptions, Status newStatus, InMemoryTaskManager manager,int type) {
+        if (manager.getTask(idChooseTask) != null || manager.getEpic(idChooseTask) != null || manager.getSubtask(idChooseTask) != null) {
+            return;
+        }
+
+        if (newName == null ){
+            if (type == 1){
+                newName = manager.getTask(idChooseTask).getName();
+            } else if (type == 2) {
+                newName = manager.getEpic(idChooseTask).getName();
+            }else {
+                newName = manager.getSubtask(idChooseTask).getName();
+            }
+        }if (newDescriptions == null){
+            if (type == 1){
+                newDescriptions = manager.getTask(idChooseTask).getDescriptions();
+            } else if (type == 2) {
+                newDescriptions = manager.getEpic(idChooseTask).getDescriptions();
+            }else {
+                newDescriptions = manager.getSubtask(idChooseTask).getDescriptions();
+            }
+        }if (newStatus == null){
+            if (type == 1){
+                newStatus = manager.getTask(idChooseTask).getStatus();
+            } else if (type == 2) {
+                newStatus = manager.getEpic(idChooseTask).getStatus();
+            }else {
+                newStatus = manager.getSubtask(idChooseTask).getStatus();
             }
         }
 
-        if (choseUse.equals("1")) {
-            newStatus = Status.NEW;
+        if (type == 1){
+            if (manager.getTask(idChooseTask) != null) {
+                return;
+            }
             Task task1 = new Task(newName, newDescriptions, newStatus);
             manager.updateTask(task1);
 
-        } else if (choseUse.equals("2")) {
-            newStatus = Status.IN_PROGRESS;
-            Task task2 = new Task(newName, newDescriptions, newStatus);
-            manager.updateTask(task2);
+        } else if (type == 2) {
+            if (manager.getEpic(idChooseTask) != null){
+                return;
+            }
 
-        } else if (choseUse.equals("3")) {
-            newStatus = Status.DONE;
-            Task task3 = new Task(newName, newDescriptions, newStatus);
-            manager.updateTask(task3);
+            Epic epic = new Epic(newName, newDescriptions, newStatus);
+            manager.updateEpic(epic);
 
-        } else {
-            System.out.println("Такого статуса нету!");
+            ArrayList<Integer> sizeSubtasks = manager.getEpic(idChooseTask).getSubtaskIds();
+            if (newStatus == Status.NEW || newStatus == Status.DONE){
+                for (int i = 0; i < sizeSubtasks.size() ; i++) {
+                    Subtask subtask = new Subtask(manager.getSubtask(i).getName(), manager.getSubtask(i).getDescriptions(), newStatus, epic.getId());
+                    manager.updateSubtask(subtask);
+                }
+            }
+
+        }else {
+            if (manager.getSubtask(idChooseTask) != null) {
+                return;
+            }
+            Subtask subtask = new Subtask(newName, newDescriptions, newStatus, manager.getSubtask(idChooseTask).getEpicId());
+            manager.updateSubtask(subtask);
         }
     }
 
@@ -434,18 +475,14 @@ public class Main {
         tempName = scanner.nextLine();
 
         if (tempName.isEmpty()) {
-            tempName = manager.getTask(idChooseTask).getName();
-            tempName = manager.getEpic(idChooseTask).getName();
-            tempName = manager.getSubtask(idChooseTask).getName();
+            tempName = null;
         }
 
         System.out.println("Введите описание обновленной задачи: ");
         tempDescriptions = scanner.nextLine();
 
         if (tempDescriptions.isEmpty()) {
-            tempDescriptions = manager.getTask(idChooseTask).getDescriptions();
-            tempDescriptions = manager.getEpic(idChooseTask).getDescriptions();
-            tempDescriptions = manager.getSubtask(idChooseTask).getDescriptions();
+            tempDescriptions = null;
         }
 
         System.out.println("Введите статус обновленной задачи:");
@@ -455,24 +492,16 @@ public class Main {
         String choseUse = scanner.nextLine();
 
         if (choseUse.equals("1")) {
-            choseUse = "1";
+            tempStatus = Status.NEW;
         } else if (choseUse.equals("2")) {
-            choseUse = "2";
+            tempStatus = Status.IN_PROGRESS;
         } else if (choseUse.equals("3")) {
-            choseUse = "3";
-        }
-
-        if (typeTask == 1) {
-
-            actionsOnTask(idChooseTask, tempName, tempDescriptions, tempStatus, manager, choseUse);
-
-        } else if (typeTask == 2) {
-            actionsOnTask(idChooseTask, tempName, tempDescriptions, tempStatus, manager, choseUse);
-        } else if (typeTask == 3) {
-            actionsOnTask(idChooseTask, tempName, tempDescriptions, tempStatus, manager, choseUse);
+            tempStatus = Status.DONE;
         }else {
-            System.out.println("Типов нету");
+            tempStatus = Status.NEW;
         }
+
+        actionsOnTask(idChooseTask, tempName, tempDescriptions, tempStatus, manager,typeTask);
     }
 
 }
