@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void printCheck(String[] items) {
         for (int i = 0; i < items.length; i++) {
-            System.out.printf("%-10s  %5s  %13s \n" ,items[i].split(","));
+            System.out.printf("%-10s  %10s  %10s \n" ,items[i].split(","));
         }
 
     }
