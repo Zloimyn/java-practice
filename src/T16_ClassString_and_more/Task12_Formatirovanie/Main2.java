@@ -17,22 +17,23 @@ public class Main2 {
         public static void printCheck(String[] items) {
             int nameProduct = 0;
             int kolvo = 0;
-            int left = 0;
 
             for (int i = 0; i < items.length; i++) {
-                if (left < findMaxLength(items[i].split(","))){
-                    left = findMaxLength(items[i].split(",")) + 2;
+                String[] allSplit = items[i].split(",");
+
+                int nameLength = allSplit[0].trim().length();
+                int kolvoLength = allSplit[1].trim().length();
+
+                if (kolvoLength > kolvo){
+                    kolvo =  kolvoLength + 1;
                 }
-                nameProduct = findMaxLength(items[i].split(","));
-            }
-
-            for (int i = 0; i < items.length + 1; i++) {
-                kolvo = findMaxLength(items[i].split(",")) - 1;
-                break;
+                if (nameLength > nameProduct){
+                    nameProduct = nameLength + 1;
+                }
             }
 
             for (int i = 0; i < items.length; i++) {
-                System.out.printf("%-" + kolvo + "s" + "%" + nameProduct + "s" + "%" + left + "s" + "\n",items[i].split(","));
+                System.out.printf("%-" + nameProduct + "s%-" + kolvo + "s %s\n",items[i].split(","));
             }
         }
 
