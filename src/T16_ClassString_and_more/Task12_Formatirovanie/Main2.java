@@ -15,7 +15,7 @@ public class Main2 {
         }
 
         public static void printCheck(String[] items) {
-            int nameProduct = 0;
+            int nameProductLength = 0;
             int kolvo = 0;
 
             for (int i = 0; i < items.length; i++) {
@@ -27,13 +27,13 @@ public class Main2 {
                 if (kolvoLength > kolvo){
                     kolvo =  kolvoLength + 1;
                 }
-                if (nameLength > nameProduct){
-                    nameProduct = nameLength + 1;
+                if (nameLength > nameProductLength){
+                    nameProductLength = nameLength + 1;
                 }
             }
 
             for (int i = 0; i < items.length; i++) {
-                System.out.printf("%-" + nameProduct + "s%-" + kolvo + "s %s\n",items[i].split(","));
+                System.out.printf("%-" + nameProductLength + "s%-" + kolvo + "s %s\n",items[i].split(","));
             }
         }
 
