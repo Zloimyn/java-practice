@@ -98,14 +98,26 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     public Task getTask(int userId){
+        if (tasks.get(userId) == null){
+            return null;
+        }
+        historyManager.add(tasks.get(userId));
         return tasks.get(userId);
     }
 
     public Subtask getSubtask(int userId){
+        if (subtasks.get(userId) == null){
+            return null;
+        }
+        historyManager.add(subtasks.get(userId));
         return subtasks.get(userId);
     }
 
     public Epic getEpic(int userId){
+        if (epics.get(userId) == null){
+            return null;
+        }
+        historyManager.add(epics.get(userId));
         return epics.get(userId);
     }
 

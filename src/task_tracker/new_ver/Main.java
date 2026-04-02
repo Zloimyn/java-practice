@@ -1,5 +1,6 @@
 package task_tracker.new_ver;
 
+import task_tracker.new_ver.service.InMemoryHistoryManager;
 import task_tracker.new_ver.service.InMemoryTaskManager;
 import task_tracker.new_ver.model.Epic;
 import task_tracker.new_ver.model.Status;
@@ -35,10 +36,12 @@ public class Main {
                 clearListTasks(scanner, manager);
             } else if (userCommand == 7) {
                 printListTasks(scanner, manager);
-            } else if (userCommand == 0) {
-                break;
+            } else if (userCommand == 8) {
+                System.out.println(manager.getDefaultHistory());
             } else if (userCommand == 9) {
                 updateTasks1(scanner,manager);
+            } else if (userCommand == 0) {
+                break;
             }
         }
 
@@ -53,8 +56,9 @@ public class Main {
         System.out.println("5- Обновить Subtask");
         System.out.println("6- Очистить список задач");
         System.out.println("7- Вывести список задач");
-        System.out.println("0- Выход из программы");
+        System.out.println("8- История задач");
         System.out.println("9- Обновление");
+        System.out.println("0- Выход из программы");
     }
 
     public static void printListChoose() {
@@ -64,15 +68,16 @@ public class Main {
     }
 
 
-    public static Task findTasksName(String nameOrDescption, HashMap<Integer, Task> mapaTasks) {
+    public static Task findTasksName(String nameOrDescption, HashMap<Integer, Task> mapaTasks,InMemoryTaskManager manager) {
 
         if (nameOrDescption == null) {
             return null;
         }
-
+        int id = 0;
         for (Task task : mapaTasks.values()) {
+            id = task.getId();
             if (task.getName().equals(nameOrDescption) || task.getDescriptions().equals(nameOrDescption)) {
-                return task;
+                //Сделать тут чтобы проверка была по id и ретурн не в fore был
             }
         }
 
@@ -80,7 +85,18 @@ public class Main {
 
     }
 
-    public static Task findTasksId(int taskId, HashMap<Integer, Task> mapaTasks) {
+    public static Task findTasksId(int taskId, HashMap<Integer, Task> mapaTasks,InMemoryTaskManager manager) {
+        for (Task task : mapaTasks.values()) {
+
+        }
+        if (manager.getTask(taskId) != null){
+            manager.getTask(taskId);
+        } else if (manager.getEpic(taskId) != null) {
+            manager.getEpic(taskId);
+        } else if (manager.getSubtask(taskId) != null) {
+            manager.getSubtask(taskId);
+        }
+
         return mapaTasks.get(taskId);
     }
 
@@ -143,11 +159,11 @@ public class Main {
         if (userChoose == 1) {
             System.out.println("Введи имя или описание: ");
             String userNum = scanner.next();
-            return findTasksName(userNum, mapaTasks);
+            return findTasksName(userNum, mapaTasks,manager);
         } else if (userChoose == 2) {
             System.out.println("Введите ID задачи: ");
             int userNum = scanner.nextInt();
-            return findTasksId(userNum, mapaTasks);
+            return findTasksId(userNum, mapaTasks,manager);
         } else {
             System.out.println("Неверно!");
             return null;
@@ -382,6 +398,10 @@ public class Main {
         int userComm = scanner.nextInt();
         switch (userComm) {
             case 4:
+                System.out.println("Tasks: " + manager.allTasks());
+                System.out.println("Epics: " + manager.allEpics());
+                System.out.println("subtasks: " + manager.allSubtasks());
+                break;
             case 1:
                 System.out.println("Tasks: " + manager.allTasks());
                 break;

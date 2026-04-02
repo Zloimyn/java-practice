@@ -15,9 +15,15 @@ public class Practice {
         System.out.println(addToMap(Map.of(), "test", "test"));
     }
 
-    public static Map<String, Object> addToMap(final Map<String, Object> storage,
-                                               final String key, final Object value) {
-        storage.put(key, value);
-        return storage;
+    public static Map<String, Object> addToMap(final Map<String, Object> storage, final String key, final Object value) {
+        try {
+            storage.put(key, value);
+            return storage;
+        }catch (NullPointerException e){
+            System.out.println("Реализация не поддерживает неинициализированные объекты.");
+        }catch (UnsupportedOperationException e){
+            System.out.println("Реализация не поддерживает добавление новых объектов");
+        }
+        return null;
     }
 }
