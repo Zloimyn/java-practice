@@ -1,4 +1,4 @@
-package T17_Исключения_and_moreTask2MAPA;
+package T17_Исключения_and_more.T17_Исключения_and_moreTask2MAPA;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,12 +18,11 @@ public class Practice {
     public static Map<String, Object> addToMap(final Map<String, Object> storage, final String key, final Object value) {
         try {
             storage.put(key, value);
-            return storage;
         }catch (NullPointerException e){
             System.out.println("Реализация не поддерживает неинициализированные объекты.");
         }catch (UnsupportedOperationException e){
             System.out.println("Реализация не поддерживает добавление новых объектов");
         }
-        return null;
+        return storage;
     }
 }
