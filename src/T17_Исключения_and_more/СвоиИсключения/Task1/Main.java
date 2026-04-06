@@ -1,13 +1,17 @@
 package T17_Исключения_and_more.СвоиИсключения.Task1;
 
 import java.util.Scanner;
-import java.util.InputMismatchException;
+
 
 public class Main {
     final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        calculate();
+        try{
+            calculate();
+        }catch (LimitException e){
+            System.out.println(e.getMessage() + ": " + e.getAttempts());
+        }
         // перехват исключения LimitException
     }
 
@@ -22,32 +26,21 @@ public class Main {
                 System.out.println(greeting + " => ");
                 try {
                     final int value = Integer.parseInt(scanner.nextLine());
-                    try {
-
-                    }catch (){
-
+                    if (value < 0){
+                        throw new InputException("Введено отрицательное число");
                     }
-                    InputException inputException = new InputException(greeting,value);
-
 
                     // проверка на отрицательное значение
                     return value;
                 } catch (NumberFormatException exception) {
+                    System.out.println("Введено не число");
 
-                    InputException inputException = new InputException(greeting,attempts);
-                    inputException.notaNumber();
                 }
             } catch (InputException exception) {
-
-                InputException inputException = new InputException(greeting, attempts);
-                inputException.problemInput();
+                System.out.println(exception.getMessage());
             }
         }
-        try {
-
-        }catch (LimitException e){
-            System.out.println("Превышен лимит ошибок ввода: " + attempts);
-        }
+        throw new LimitException("Превышен лимит ошибок", attempts);
         // сгенерируйте исключение LimitException с сообщением "Превышен лимит ошибок ввода"
     }
 
@@ -58,27 +51,23 @@ public class Main {
                 // добавьте недостающий код
                 try {
                     final double value = Double.parseDouble(scanner.nextLine());
-                    InputException inputException = new InputException(greeting,value);
-                    inputException.numberIsNormal();
 
+                    if (value < 0){
+                        throw new InputException("Введено отрицательное число");
+                    }
 
                     return value;
                 } catch (NumberFormatException exception) {
-                    InputException inputException = new InputException(greeting,attempts);
-                    inputException.notaNumber();
+                    System.out.println("Введено не число");
 
                 }
             } catch (InputException exception) {
-                InputException inputException = new InputException(greeting, attempts);
-                inputException.problemInput();
+                System.out.println(exception.getMessage());
 
             }
         }
-        try {
+        throw new LimitException("Превышен лимит ошибок", attempts);
 
-        }catch (LimitException e){
-            System.out.println("Превышен лимит ошибок ввода: " + attempts);
-        }
         // сгенерируйте исключение LimitException
     }
 
