@@ -73,28 +73,38 @@ public class Main {
         if (nameOrDescption == null) {
             return null;
         }
-        int id = 0;
+
         for (Task task : mapaTasks.values()) {
-            id = task.getId();
             if (task.getName().equals(nameOrDescption) || task.getDescriptions().equals(nameOrDescption)) {
-                //Сделать тут чтобы проверка была по id и ретурн не в fore был
+                if (manager.getTask(task.getId()) != null){
+                    manager.getTask(task.getId());
+                    manager.getDefaultHistory().remove(task.getId());
+                } else if (manager.getEpic(task.getId()) != null) {
+                    manager.getEpic(task.getId());
+                    manager.getDefaultHistory().remove(task.getId());
+                } else if (manager.getSubtask(task.getId()) != null) {
+                    manager.getSubtask(task.getId());
+                    manager.getDefaultHistory().remove(task.getId());
+                }
+
+
+                return task;
             }
         }
-
         return null;
-
     }
 
     public static Task findTasksId(int taskId, HashMap<Integer, Task> mapaTasks,InMemoryTaskManager manager) {
-        for (Task task : mapaTasks.values()) {
 
-        }
         if (manager.getTask(taskId) != null){
             manager.getTask(taskId);
+            manager.getDefaultHistory().remove(taskId);
         } else if (manager.getEpic(taskId) != null) {
             manager.getEpic(taskId);
+            manager.getDefaultHistory().remove(taskId);
         } else if (manager.getSubtask(taskId) != null) {
             manager.getSubtask(taskId);
+            manager.getDefaultHistory().remove(taskId);
         }
 
         return mapaTasks.get(taskId);
