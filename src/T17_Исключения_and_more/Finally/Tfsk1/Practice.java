@@ -11,8 +11,7 @@ public class Practice {
             new PasswordLengthValidator(5), new PasswordStrengthValidator()
     );
 
-    static NameValidator nameValidator = new NameValidator();
-    private static final List<Validator> nameValidators = List.of(); // поработайте со списком
+    private static final List<Validator> nameValidators = List.of(new NameValidator()); // поработайте со списком
 
 
     public static void main(String[] args) {
@@ -53,19 +52,17 @@ public class Practice {
             final String password = scanner.nextLine();
             checkValidatorRules(passwordValidators, password);
             storage.store(name, password);
-            nameValidators.add(nameValidator);
-            storage.close();
-        } catch (ValidateNameException | ValidatePasswordException e){
+        }catch (ValidateNameException e){
+            System.out.println(e.getMessage() + ": " + nameValidators);
+        }catch (ValidatePasswordException e){
             System.out.println(e.getMessage() + ": " + passwordValidators);
-            storage.close();
         } catch (ValidateException e) {
             System.out.println("Ошибка валидации: " + e.getMessage());
-            storage.close();
         } catch (IOException e) {
             System.out.println("Ошибка работы с хранилищем: " + e.getMessage());
+        }finally {
             storage.close();
         }
-        storage.close();
     }
 
     private static void showUserPassword() {
@@ -79,19 +76,15 @@ public class Practice {
             checkValidatorRules(nameValidators, name);
             final String password = storage.get(name);
             System.out.println(String.format("Пароль пользователя %s = %s", name, password));
-            nameValidators.add(nameValidator);
-            storage.close();
         } catch (ValidateNameException e){
             System.out.println(e.getMessage() + ": " + nameValidators);
-            storage.close();
         } catch (ValidateException e) {
             System.out.println("Ошибка валидации: " + e.getMessage());
-            storage.close();
         } catch (IOException e) {
             System.out.println("Ошибка работы с хранилищем: " + e.getMessage());
+        }finally {
             storage.close();
         }
-        storage.close();
     }
 
     private static String getAction() {
