@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
-public class Test5 {
+public class Task5 {
     private static final String HOME = System.getProperty("user.home");
 
     public static void main(String[] args) throws IOException {

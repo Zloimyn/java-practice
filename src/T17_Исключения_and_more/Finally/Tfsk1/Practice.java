@@ -61,6 +61,9 @@ public class Practice {
         } catch (IOException e) {
             System.out.println("Ошибка работы с хранилищем: " + e.getMessage());
         }finally {
+
+
+            
             storage.close();
         }
     }
