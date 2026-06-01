@@ -10,7 +10,7 @@ public class Current_taskV2 {
     public static void main(String[] args) throws IOException {
         Map<String, Integer> mapa = new HashMap<>();
 
-        FileReader reader = new FileReader("result.txt");
+        FileReader reader = new FileReader("words.txt");
         BufferedReader bufferedReader = new BufferedReader(reader);
 
         while (bufferedReader.ready()){

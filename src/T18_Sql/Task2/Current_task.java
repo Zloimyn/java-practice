@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Current_task {
     public static void main(String[] args) throws IOException {
-        FileReader reader = new FileReader("result.txt");
+        FileReader reader = new FileReader("words.txt");
         BufferedReader bufferedReader = new BufferedReader(reader);
 
         int a = 0;
