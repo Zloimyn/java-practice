@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Test6 {
+public class Task6 {
     private static final String HOME = System.getProperty("user.home");
 
     public static void main(String[] args) {
