@@ -23,13 +23,13 @@ public class Task {
         long startOfYear = scanner.nextLong();
 
         // нам нужно знать, когда начался этот год
-        Instant startOfYearMoment = ...
+        Instant startOfYearMoment = Instant.ofEpochSecond(startOfYear);
 
         // и текущую дату
-        Instant thisMoment = ...
+        Instant thisMoment = Instant.ofEpochSecond(startOfYear);
 
         // и конечную дату нашего графика рассветов и закатов (плюс семь дней)
-        Instant lastMoment = ...
+        Instant lastMoment = thisMoment.plus(+ 7, ChronoUnit.DAYS);
 
         System.out.println("Рассвет - Закат, график на неделю:");
         do {
@@ -47,15 +47,15 @@ public class Task {
 
             // эта конструкция позволит вам высчитать следующий день
             thisMoment = thisMoment.plus(1, ChronoUnit.DAYS);
-        } while ( ... ); // вам нужно вывести график на семь дней
+        } while (thisMoment.isBefore(lastMoment) ); // вам нужно вывести график на семь дней
 
     }
 
     // эта функция высчитывает текущий день года по заданному моменту начала года и по заданному текущему времени
     // TODO повышенный уровень сложности: попробуйте учесть високосный год
     private static int dayOfYearFromInstant(Instant startOfYear, Instant time) {
-        long fromStartOfYear = ...
-        return ...fromStartOfYear ...
+        long fromStartOfYear = ChronoUnit.DAYS.between(startOfYear, time);
+        return (int) (fromStartOfYear + 1);
     }
 
     // все формулы ниже вы можете просто использовать как есть
