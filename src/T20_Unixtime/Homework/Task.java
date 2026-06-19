@@ -29,7 +29,7 @@ public class Task {
         Instant thisMoment = Instant.ofEpochSecond(startOfYear);
 
         // и конечную дату нашего графика рассветов и закатов (плюс семь дней)
-        Instant lastMoment = thisMoment.plus(+ 7, ChronoUnit.DAYS);
+        Instant lastMoment = thisMoment.plus(7, ChronoUnit.DAYS);
 
         System.out.println("Рассвет - Закат, график на неделю:");
         do {
@@ -55,7 +55,7 @@ public class Task {
     // TODO повышенный уровень сложности: попробуйте учесть високосный год
     private static int dayOfYearFromInstant(Instant startOfYear, Instant time) {
         long fromStartOfYear = ChronoUnit.DAYS.between(startOfYear, time);
-        return (int) (fromStartOfYear + 1);
+        return (int) fromStartOfYear;
     }
 
     // все формулы ниже вы можете просто использовать как есть
