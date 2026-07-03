@@ -1,4 +1,4 @@
-package T21_Tests.Task1.Zadachka3;
+package T21_Tests.Zadachka3;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,8 @@ public class BankAccountTest {
     @Test
     void shouldReturnFirstNameThenSecondName () {
         BankAccount account = new BankAccount("a", "b");
-        assertArrayEquals(account.getFullName(),account.getFullName());
+        String[] expected = {"a","b"};
+        assertArrayEquals(expected, account.getFullName());
     }
 
     @Test

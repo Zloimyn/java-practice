@@ -1,4 +1,4 @@
-package T21_Tests.Task1.Task3;
+package T21_Tests.Task3;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

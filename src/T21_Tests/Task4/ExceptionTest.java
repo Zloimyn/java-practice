@@ -1,4 +1,4 @@
-package T21_Tests.Task1.Task4;
+package T21_Tests.Task4;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

@@ -1,4 +1,4 @@
-package T21_Tests.Task1.Zadachka1;
+package T21_Tests.Zadachka1;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

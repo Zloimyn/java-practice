@@ -1,4 +1,4 @@
-package T21_Tests.Task1.Zadachka3;
+package T21_Tests.Zadachka3;
 
 public class BankAccount {
 

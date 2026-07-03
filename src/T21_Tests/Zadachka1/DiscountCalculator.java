@@ -1,4 +1,4 @@
-package T21_Tests.Task1.Zadachka1;
+package T21_Tests.Zadachka1;
 
 public class DiscountCalculator {
     public int sumAfterDiscount(int sum) {
