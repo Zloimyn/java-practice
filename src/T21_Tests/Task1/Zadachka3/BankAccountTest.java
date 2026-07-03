@@ -36,7 +36,7 @@ public class BankAccountTest {
     @Test
     void shouldReturnNullAmountWhenNotActive () {
         BankAccount account = new BankAccount("a", "b");
-        account.getAmount();
-        assertNull(null, account.getCurrency());
+        String[] expected = {"a","b"};
+        assertArrayEquals(expected, account.getFullName());
     }
 }
