@@ -37,7 +37,10 @@ public class BankAccountTest {
     @Test
     void shouldReturnNullAmountWhenNotActive () {
         BankAccount account = new BankAccount("a", "b");
-        String[] expected = {"a","b"};
-        assertArrayEquals(expected, account.getFullName());
+        assertNull(account.getCurrency());
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
+            account.getAmount();
+        });
+        assertEquals("Счёт не активирован.", exception.getMessage());
     }
 }

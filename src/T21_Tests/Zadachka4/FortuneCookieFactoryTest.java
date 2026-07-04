@@ -8,11 +8,11 @@ import static java.util.Collections.singletonList;
 
 public class FortuneCookieFactoryTest {
 
-    private FortuneConfig config;
     private FortuneCookieFactory fortuneCookieFactory;
 
     @BeforeEach
     void WW(){
+        FortuneConfig config;
         config = new FortuneConfig(true);
         fortuneCookieFactory = new FortuneCookieFactory(
                 config,

@@ -7,18 +7,19 @@ import static java.util.Collections.singletonList;
 
 public class FortuneCookieControllerTest {
 
-    private static FortuneCookieController badFactoru;
-    private static FortuneCookieController goodFactoru;
+    private static FortuneCookieController  goodFactoru;
+    private static FortuneCookieController  badFactory;
+
+    static FortuneCookieController createController(boolean isPositive){
+        FortuneConfig Config = new FortuneConfig(isPositive);
+        FortuneCookieFactory  Factory = new FortuneCookieFactory(Config, singletonList("positive"), singletonList("negative"));
+        return new FortuneCookieController(Factory);
+    }
 
     @BeforeAll
     static void WW(){
-        FortuneConfig goodConfig = new FortuneConfig(true);
-        FortuneCookieFactory goodFactory = new FortuneCookieFactory(goodConfig, singletonList("positive"), singletonList("negative"));
-        goodFactoru = new FortuneCookieController(goodFactory);
-
-        FortuneConfig badConfig = new FortuneConfig(false);
-        FortuneCookieFactory badFactory = new FortuneCookieFactory(badConfig, singletonList("positive"), singletonList("negative"));
-        badFactoru = new FortuneCookieController(badFactory);
+        goodFactoru = createController(true);
+        badFactory = createController(false);
     }
 
     @Test
@@ -28,6 +29,7 @@ public class FortuneCookieControllerTest {
 
     @Test
     public void shouldReturnNegativeFortune (){
-        Assertions.assertEquals("negative", badFactoru.tellFortune().getFortuneText());
+        createController(false);
+        Assertions.assertEquals("negative", badFactory.tellFortune().getFortuneText());
     }
 }
