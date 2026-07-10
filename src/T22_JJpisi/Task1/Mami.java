@@ -17,13 +17,11 @@ public class Mami {
         List<Person> persons = new ArrayList<>();
 
         while (resultSet.next()){
-            Person person = new Person();
-
-            person.first_name = resultSet.getString("first_name");
-            person.last_name = resultSet.getString("last_name");
-            person.email = resultSet.getString("email");
-            person.mmr = resultSet.getInt("mmr");
-            person.age = resultSet.getInt("age");
+            Person person = new Person(resultSet.getString("first_name"),
+                    resultSet.getString("last_name"),
+                    resultSet.getString("email"),
+                    resultSet.getInt("mmr"),
+                    resultSet.getInt("age"));
 
             persons.add(person);
         }
@@ -32,18 +30,12 @@ public class Mami {
         for (int i = 0; i < persons.size(); i++){
             person = persons.get(i);
 
-            System.out.println("Имя: " + person.first_name
-                    + " Фамилия: " + person.last_name
-                    + " Почта: " + person.email
-                    + " MMR: " + person.mmr
-                    + " Лет: " + person.age);
+            System.out.println("Имя: " + person.getFirst_name()
+                    + " Фамилия: " + person.getLast_name()
+                    + " Почта: " + person.getEmail()
+                    + " MMR: " + person.getMmr()
+                    + " Лет: " + person.getAge());
         }
     }
-    static class Person{
-        String first_name;
-        String last_name;
-        String email;
-        Integer mmr;
-        Integer age;
-    }
+
 }
