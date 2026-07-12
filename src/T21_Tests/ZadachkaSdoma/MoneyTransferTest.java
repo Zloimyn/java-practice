@@ -52,7 +52,7 @@ public class MoneyTransferTest {
 
 
 
-    //Новые Test-ы
+    //Новые Other.Test-ы
     @Test
     public void shouldNotTransferNegative() {
         Account accountOne = new Account("1", 10);
