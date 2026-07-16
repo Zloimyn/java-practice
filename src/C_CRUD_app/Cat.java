@@ -5,7 +5,7 @@ public class Cat {
     String name;
     String colour;
 
-    public Cat(String colour, String name, Integer id) {
+    public Cat(Integer id, String name,String colour) {
         this.colour = colour;
         this.name = name;
         this.id = id;
