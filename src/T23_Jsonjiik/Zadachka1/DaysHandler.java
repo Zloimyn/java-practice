@@ -1,4 +1,4 @@
-package T23_Jsonjiik.Zadanie;
+package T23_Jsonjiik.Zadachka1;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -20,7 +20,6 @@ public class DaysHandler implements HttpHandler {
         httpExchange.sendResponseHeaders(200, 0);
 
         try (OutputStream os = httpExchange.getResponseBody()) {
-
             os.write(randomDay.getBytes());
         }
     }

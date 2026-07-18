@@ -1,4 +1,4 @@
-package T23_Jsonjiik.Zadanie;
+package T23_Jsonjiik.Zadachka1;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
